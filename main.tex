@@ -1,0 +1,55 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage[
+    backend=biber,
+    style=alphabetic,
+    sorting=ynt
+    ]{biblatex}
+
+\addbibresource{refs.bib}
+    
+\title{Plugin de acessibilidade para sites Governamentais}
+\author{João Victor Pereira dos Anjos}
+\date{Jan 2025}
+
+
+\begin{document}
+
+\maketitle
+  
+\tableofcontents
+
+\section{Resumo}
+   
+This is the first section.
+      
+Lorem  ipsum  dolor  sit  amet,  consectetuer  adipiscing  
+elit.   Etiam  lobortisfacilisis sem.  Nullam nec mi et 
+neque pharetra sollicitudin.  Praesent imperdietmi nec ante. 
+Donec ullamcorper, felis non sodales..
+
+\section{Introdução}
+
+A palavra acessibilidade, sua origem etimológica é derivada do latim \textit{accessiblitas} e significacondição para utilização, com segurança e autonomia, total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de comunicação e informação, por pessoa com deficiência ou mobilidade reduzida
+       
+\section*{Unnumbered Section}
+\addcontentsline{toc}{section}{Unnumbered Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
+sollicitudin.  Praesent imperdiet mi necante\ldots
+
+\section{Second Section}
+       
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
+sollicitudin.  Praesent imperdiet mi necante\ldots
+
+\medskip
+
+\printbibliography
+
+\end{document}
