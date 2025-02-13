@@ -6,3 +6,7 @@ main.fdb_latexmk
 main.fls
 main.synctex.gz
 main.toc
+main.bbl
+main.bcf
+main.run.xml
+main.blg

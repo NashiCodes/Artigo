@@ -1,16 +1,18 @@
-\documentclass[12pt,letterpaper]{article}
+\documentclass[12pt]{article}
+\usepackage{xurl}
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
 \usepackage[brazil]{babel}
 \usepackage{graphicx}
 \usepackage[
     backend=biber,
-    style=alphabetic,
-    sorting=ynt
+    language=brazil,
     ]{biblatex}
 
-\addbibresource{refs.bib}
-    
+\DeclareFieldFormat{url}{Disponível em\addcolon\space\url{#1}}
+\addbibresource{references.bib}
+
+
 \title{Plugin de acessibilidade para sites Governamentais}
 \author{João Victor Pereira dos Anjos}
 \date{Jan 2025}
@@ -33,23 +35,45 @@ Donec ullamcorper, felis non sodales..
 
 \section{Introdução}
 
-A palavra acessibilidade, sua origem etimológica é derivada do latim \textit{accessiblitas} e significacondição para utilização, com segurança e autonomia, total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de comunicação e informação, por pessoa com deficiência ou mobilidade reduzida
-       
-\section*{Unnumbered Section}
-\addcontentsline{toc}{section}{Unnumbered Section}
+A palavra acessibilidade, sua origem etimológica é derivada do 
+latim \textit{accessiblitas} e significa ``condição para utilização, com segurança e autonomia, total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de comunicação e informação, por pessoa com deficiência ou mobilidade reduzida''\cite{Acessibilidade}. No âmbito digital a acessibilidade web é um pilar fundamental para a inclusão, garantindo que todos os usuários, independentemente de suas capacidades físicas ou cognitivas, possam acessar, compreender e interagir com conteúdo online.\cite{wcag21}. 
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
-Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
-sollicitudin.  Praesent imperdiet mi necante\ldots
+\subsection{Contexto Institucional e Desafios Operacionais}\label{subsec:contexto}
+Trazendo para o contexto brasileiro, o Modelo de Acessibilidade em Governo Eletrônico\cite{emag} e as Diretrizes de Acessibilidade para Conteúdo Web\cite{wcag22} estabelecem parâmetros técnicos para essa inclusão. No entanto, a implementação prática dessas diretrizes enfrenta desafios significativos, especialmente em instituições públicas de grande porte, A Universidade Federal de Juiz de Fora (UFJF) gerencia uma ampla rede de sites institucionais atualizados por conteudistas sem formação técnica em acessibilidade\cite{emag}. Os principais desafios incluem:
 
-\section{Second Section}
-       
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
-Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
-sollicitudin.  Praesent imperdiet mi necante\ldots
+\begin{itemize}
+\item Falta de padronização em elementos críticos como texto alternativo
+\item Dependência de auditorias manuais demoradas
+\item Dificuldade de escalabilidade na plataforma WordPress
+\end{itemize}
 
-\medskip
+\subsection{Diretrizes e Fundamentação Técnica}\label{subsec:diretrizes}
+O sistema foi estruturado com base em:
 
-\printbibliography
+\begin{itemize}
+\item\cite{wcag22} (Níveis A e AA)
+\item\cite{emag} para o setor público brasileiro
+\item Framework\cite{axecore} para análise técnica
+\end{itemize}
+
+\section{Arquitetura do Sistema}\label{sec:arquitetura}
+Sistema desenvolvido com arquitetura modular integrando:
+
+\subsection{Componentes Técnicos e Funcionalidades}\label{subsec:componentes}
+\begin{itemize}
+\item Renderização headless com Puppeteer\cite{puppeteer}
+\item Motor de análise\cite{axecore} (203 regras WCAG)
+\item Módulo de pós-processamento Cleaner.js
+\end{itemize}
+
+\subsection{Integração com WordPress e APIs REST}\label{subsec:api}
+\begin{itemize}
+\item Autenticação via\cite{jwt}
+\item Endpoints REST para avaliação de conteúdo
+\item Plugin WordPress com interface intuitiva
+\end{itemize}
+
+\nocite{*}
+\printbibliography[title={Referências}]
 
 \end{document}
