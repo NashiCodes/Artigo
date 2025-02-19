@@ -1,4 +1,6 @@
 \documentclass[12pt]{article}
+\usepackage{hyphenat}
+
 \usepackage{xurl}
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
@@ -6,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage[
     backend=biber,
+    style=abnt,
     language=brazil,
     ]{biblatex}
 
@@ -36,41 +39,205 @@ Donec ullamcorper, felis non sodales..
 \section{Introdução}
 
 A palavra acessibilidade, sua origem etimológica é derivada do 
-latim \textit{accessiblitas} e significa ``condição para utilização, com segurança e autonomia, total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de comunicação e informação, por pessoa com deficiência ou mobilidade reduzida''\cite{Acessibilidade}. No âmbito digital a acessibilidade web é um pilar fundamental para a inclusão, garantindo que todos os usuários, independentemente de suas capacidades físicas ou cognitivas, possam acessar, compreender e interagir com conteúdo online.\cite{wcag21}. 
+latim \textit{accessiblitas} e significa ``condição para utilização, com segurança e
+autonomia, total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das 
+edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de 
+comunicação e informação, por pessoa com deficiência ou mobilidade reduzida''\cite{Acessibilidade}.
+No âmbito digital a acessibilidade web é um pilar fundamental para a inclusão, 
+garantindo que todos os usuários, independentemente de suas capacidades físicas ou 
+cognitivas, possam acessar, compreender e interagir com conteúdo online.\cite{wcag22}. 
+
+Trazendo para o contexto brasileiro, o Modelo de Acessibilidade em Governo 
+Eletrônico\cite{emag} e as Diretrizes de Acessibilidade para Conteúdo Web\cite{wcag22} 
+estabelecem parâmetros técnicos para essa inclusão. No entanto, a implementação 
+prática dessas diretrizes enfrenta desafios significativos, especialmente em 
+instituições públicas de grande porte, como a Universidade Federal de Juiz de Fora 
+(UFJF), que gerencia centenas de sites institucionais atualizados frequentemente por 
+conteudistas sem formação técnica emacessibilidade.
+
+O problema central reside na complexidade de auditorias manuais, que consomem
+tempo e recursos, e na falta de ferramentas centralizadas dentro da UFJF para
+identificar e corrigir violações. Por exemplo, em uma análise preliminar, boa parte 
+das páginas e posts da UFJF apresentavam erros críticos, como imagens sem texto
+alternativo e baixo contraste de cores, limitando o acesso de usuários com deficiência
+visual. Além disso, a ausência de relatórios contextualizados dificultava a 
+priorização de correções por parte das equipes responsáveis.
+
+Neste cenário, este artigo propõe uma solução técnica inovadora: um sistema
+automatizado de auditoria, integrado ao WordPress (plataforma amplamente utilizada
+pela instituição), que combina:
+
+\begin{itemize}
+\item \textbf{Renderização headless da pagina via Puppeteer} para capturar conteúdo
+dinâmico (ex: Single-Page Applications).\cite{puppeteer}
+\item \textbf{Análise técnica com Axe-core\cite{axecore}}, cobrindo mais de 200 regras WCAG 2.1/2.2 e eMAG.\@
+\item \textbf{APIs REST personalizadas} para avaliação de URLs internas, externas e
+conteúdo HTML/CSS bruto.
+\item \textbf{Pós-processamento inteligente} de relatórios, filtrando falsos
+positivos e oferecer sugestões de correção em linguagem acessível.
+\end{itemize}
+
+A ferramenta não apenas otimiza processos técnicos, mas \textbf{democratiza a
+fiscalização de acessibilidade}, empoderando conteudistas não especialistas com
+dados claros e acionáveis. Este trabalho visa, portanto, contribuir para o debate 
+sobre automação e inclusão digital, oferecendo um modelo replicável para instituições
+públicas e privadas que buscam alinhar-se às exigências legais e éticas da
+acessibilidade web.
 
 \subsection{Contexto Institucional e Desafios Operacionais}\label{subsec:contexto}
-Trazendo para o contexto brasileiro, o Modelo de Acessibilidade em Governo Eletrônico\cite{emag} e as Diretrizes de Acessibilidade para Conteúdo Web\cite{wcag22} estabelecem parâmetros técnicos para essa inclusão. No entanto, a implementação prática dessas diretrizes enfrenta desafios significativos, especialmente em instituições públicas de grande porte, A Universidade Federal de Juiz de Fora (UFJF) gerencia uma ampla rede de sites institucionais atualizados por conteudistas sem formação técnica em acessibilidade\cite{emag}. Os principais desafios incluem:
+A Universidade Federal de Juiz de Fora (UFJF) gerencia uma ampla rede de sites
+institucionais, abrangendo portais acadêmicos, departamentais e projetos de extensão.
+Esses sites são atualizados frequentemente por \textbf{conteudistas sem formação 
+técnica em acessibilidade}, como professores, servidores administrativos e
+colaboradores externos. A ausência de ferramentas especializadas para auditorias 
+automatizadas resultava em desafios críticos:
 
 \begin{itemize}
-\item Falta de padronização em elementos críticos como texto alternativo
-\item Dependência de auditorias manuais demoradas
-\item Dificuldade de escalabilidade na plataforma WordPress
+\item \textbf{Falta de padronização}: Conteúdos publicados sem verificação prévia de
+elementos essenciais (ex: texto alternativo em imagens, rótulos em formulários).
+\item \textbf{Dependência de auditorias manuais:} Processos demorados e suscetíveis 
+a inconsistências, especialmente em páginas com conteúdo 
+dinâ\-mico.
+\item \textbf{Dificuldade de escalabilidade}: Impossibilidade de avaliar centenas de páginas de forma ágil e integrada à plataforma WordPress, amplamente utilizada pela
+instituição.
 \end{itemize}
+
+Além disso, a natureza descentralizada da gestão dos sites gerava relatórios
+fragmentados, dificultando a priorização de correções e a padronização de práticas de
+acessibilidade. A falta de dados claros e contextualizados limitava a eficácia das
+ações de capacitação e sensibilização promovidas pela UFJF, que visam promover uma
+cultura inclusiva e acessível.
 
 \subsection{Diretrizes e Fundamentação Técnica}\label{subsec:diretrizes}
-O sistema foi estruturado com base em:
+O sistema foi estruturado com base em diretrizes reconhecidas internacionalmente e
+adaptações para o contexto institucional:
 
-\begin{itemize}
-\item\cite{wcag22} (Níveis A e AA)
-\item\cite{emag} para o setor público brasileiro
-\item Framework\cite{axecore} para análise técnica
-\end{itemize}
+\begin{enumerate}
+    \item WCAG 2.1/2.2 (Níveis A e AA)
+    \begin{itemize}
+        \item Princípios fundamentais: 
+        \begin{itemize}
+            \item \textbf{Perceptível:} Garantia de alternativas textuais para mídias não
+            textuais, contraste de cores adequado e organização lógica do conteúdo.
+            \item \textbf{Operável:} Compatibilidade com navegação por teclado e tempo
+            adequado para interação.
+            \item \textbf{Compreensível:} Clareza na apresentação de informações e
+            prevenção de erros de entrada.
+            \item \textbf{Robusto:} Compatibilidade com tecnologias assistivas e
+            manutenção de conteúdo acessível em atualizações.
+        \end{itemize}
+    \end{itemize}
+    \item eMAG (Modelo de Acessibilidade em Governo Eletrônico)
+    \begin{itemize}
+        \item Especificidades para o setor público:
+        \begin{itemize}
+            \item Foco em formulários simplificados e linguagem acessível.
+            \item Adaptação de termos técnicos para o português brasileiro.
+            \item Recomendações para contraste visual adequado em interfaces
+            institucionais.
+        \end{itemize}
+    \end{itemize}
+    \item Critérios de Implementação do Sistema
+    \begin{itemize}
+        \item \textbf{Abrangência:} Suporte a regras de acessibilidade mapeadas pelo Axe-core,
+        incluindo verificações para elementos críticos como imagens, formulários e
+        estrutura semântica.
+        \item \textbf{Flexibilidade:} Personalização via variáveis de ambiente, permitindo ajustes
+        como desabilitar regras irrelevantes para contextos específicos (ex: sites
+        estáticos sem formulários).
+        \item \textbf{Integração:} Compatibilidade nativa com a API REST do WordPress, facilitando
+        a adoção pelos gestores de conteúdo da UFJF.\@
+    \end{itemize}
+\end{enumerate}
 
 \section{Arquitetura do Sistema}\label{sec:arquitetura}
-Sistema desenvolvido com arquitetura modular integrando:
+O sistema proposto foi desenvolvido com uma arquitetura modular, dividida em
+camadas interdependentes que garantem escalabilidade, segurança e eficiência na
+avaliação de acessibilidade. A estrutura integra tecnologias modernas de automação,
+análise técnica e processamento de dados, adaptadas às necessidades específicas da
+UFJF.\@
 
 \subsection{Componentes Técnicos e Funcionalidades}\label{subsec:componentes}
+A arquitetura é sustentada por três componentes principais, cada um com funções
+específicas:
+
 \begin{itemize}
-\item Renderização headless com Puppeteer\cite{puppeteer}
-\item Motor de análise\cite{axecore} (203 regras WCAG)
-\item Módulo de pós-processamento Cleaner.js
+\item Puppeteer para Renderização Headless\cite{puppeteer}
+\begin{itemize}
+    \item \textbf{Objetivo:} Capturar conteúdo dinâmico de páginas web, como Single-Page
+    Applications (SPAs) e elementos carregados via JavaScript.
+    \item \textbf{Funcionalidades:}
+    \begin{itemize}
+        \item Navegação automatizada com suporte a eventos load e networkidle0 para
+        garantir renderização completa.
+        \item Configuração de timeout estendido para páginas complexas.\@
+        \item Reutilização de instâncias do navegador para otimização de recursos.
+    \end{itemize}
+\end{itemize}
+\item Axe-core para Análise de Acessibilidade\cite{axecore} (203 regras WCAG)
+\begin{itemize}
+    \item \textbf{Cobertura:} 203 regras WCAG 2.1/2.2 e eMAG\cite{emag,wcag22}, categorizadas por criticidade
+    (crítico, sério, moderado).
+    \item \textbf{Personalização:} 
+    \begin{itemize}
+        \item Filtragem de regras via variáveis de ambiente.
+        \item Foco em elementos específicos (ex: \#conteudo-main em sites
+        WordPress).
+        \item Suporte a localização em português brasileiro.
+    \end{itemize}
+\end{itemize}
+\item Módulo de Pós-Processamento de Relatórios.
+
+\textbf{Etapas:}
+    \begin{enumerate}
+        \item \textbf{Filtragem de Falsos Positivos:} Remoção de imagens com texto alternativo vazio
+        mas declaradas no elemento HTML (alt=`` '') das avaliações que passaram 
+        (consideradas intencionalmente decorativas).
+        \item \textbf{Contextualização de Erros:} Limpa propriedades desnecessá\-rias e erros
+        duplicados.
+        \item \textbf{Estruturação de Relatórios:} Agregação de metadados como timestamp, URL e
+        contagem de violações por tipo.
+    \end{enumerate}
 \end{itemize}
 
 \subsection{Integração com WordPress e APIs REST}\label{subsec:api}
+O sistema opera como um plugin WordPress com backend independente, garantindo
+flexibilidade e segurança. A integração com a API REST nativa do WordPress permite
+avaliações de acessibilidade em tempo real. As principais funcionalidades incluem:
+
 \begin{itemize}
-\item Autenticação via\cite{jwt}
-\item Endpoints REST para avaliação de conteúdo
-\item Plugin WordPress com interface intuitiva
+\item API REST Personalizada
+\begin{itemize}
+    \item \textbf{Endpoints Principais:}
+    \begin{itemize}
+        \item \textbf{POST /login: }Autenticação via Basic Auth, retornando token JWT válido
+        por 1 hora.
+        \item \textbf{GET /internal/site/{id}: }Avaliação completa de um site
+        WordPress (todos os posts).
+        \item \textbf{GET internal/site/1/post/?url={urlDoPost}: } Análise de um
+        post específico de um site específico.
+    \end{itemize}
+    \item \textbf{Autenticação e Segurança:}
+    \begin{itemize}
+        \item Tokens JWT assinados com chave privada armazenada em variáveis de
+        ambiente.
+        \item Middleware de validação em todas as rotas protegidas.
+        \item \textbf{Por que JWT?}
+        \begin{itemize}
+            \item \textbf{Stateless:} Não requer armazenamento de sessão no servidor.
+            \item \textbf{Seguro:} Assinatura digital previne tampering.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\item Fluxo de Trabalho no WordPress
+\begin{itemize}
+    \item \textbf{Frontend (Plugin WordPress):}
+    \begin{itemize}
+        \item Interface intuitiva para seleção de sites/posts a serem avaliados.
+        \item Exibição de relatórios com sugestões de correção em cards interativos.
+    \end{itemize}
+\end{itemize}
+
 \end{itemize}
 
 \nocite{*}
