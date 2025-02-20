@@ -1,7 +1,4 @@
 \documentclass[12pt]{article}
-\usepackage{hyphenat}
-
-\usepackage{xurl}
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
 \usepackage[brazil]{babel}
@@ -12,7 +9,6 @@
     language=brazil,
     ]{biblatex}
 
-\DeclareFieldFormat{url}{Disponível em\addcolon\space\url{#1}}
 \addbibresource{references.bib}
 
 
@@ -38,51 +34,56 @@ Donec ullamcorper, felis non sodales..
 
 \section{Introdução}
 
-A palavra acessibilidade, sua origem etimológica é derivada do 
-latim \textit{accessiblitas} e significa ``condição para utilização, com segurança e
-autonomia, total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das 
-edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de 
+A palavra acessibilidade, sua origem etimológica é derivada do latim \textit{accessiblitas} 
+e significa ``condição para utilização, com segurança e autonomia, 
+total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das 
+edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de
 comunicação e informação, por pessoa com deficiência ou mobilidade reduzida''\cite{Acessibilidade}.
-No âmbito digital a acessibilidade web é um pilar fundamental para a inclusão, 
-garantindo que todos os usuários, independentemente de suas capacidades físicas ou 
-cognitivas, possam acessar, compreender e interagir com conteúdo online.\cite{wcag22}. 
 
-Trazendo para o contexto brasileiro, o Modelo de Acessibilidade em Governo 
-Eletrônico\cite{emag} e as Diretrizes de Acessibilidade para Conteúdo Web\cite{wcag22} 
-estabelecem parâmetros técnicos para essa inclusão. No entanto, a implementação 
-prática dessas diretrizes enfrenta desafios significativos, especialmente em 
-instituições públicas de grande porte, como a Universidade Federal de Juiz de Fora 
-(UFJF), que gerencia centenas de sites institucionais atualizados frequentemente por 
-conteudistas sem formação técnica emacessibilidade.
+No Brasil, a acessibilidade é um direito garantido pela Constituição 
+Federal de 1988, pela Lei Brasileira de Inclusão (LBI) de 2015 \Cite{LBI}
+e por normas técnicas específicas, como a NBR 9050/2015 da Associação 
+Brasileira de Normas Técnicas~\cite{ABNT}. Essas legislações estabelecem 
+parâmetros para a promoção da acessibilidade em espaços públicos e privados,
+visando a inclusão de pessoas com deficiência física, visual, auditiva, 
+intelectual e múltipla.
+
+No âmbito digital a acessibilidade web é um pilar fundamental para a 
+inclusão, garantindo que todos os usuários, independentemente de suas
+capacidades físicas ou cognitivas, possam acessar, compreender e interagir com
+conteúdo online.\cite{wcag22}. 
+
+A Universidade Federal de Juiz de Fora (UFJF), gerencia centenas 
+de sites institucionais atualizados frequentemente por pessoas denominadas
+conteudistas. 
 
 O problema central reside na complexidade de auditorias manuais, que consomem
 tempo e recursos, e na falta de ferramentas centralizadas dentro da UFJF para
-identificar e corrigir violações. Por exemplo, em uma análise preliminar, boa parte 
-das páginas e posts da UFJF apresentavam erros críticos, como imagens sem texto
+aplicar o Modelo de Acessibilidade em 
+Governo Eletrônico~\cite{emag}, conhecido como eMag, e as Diretrizes 
+de Acessibilidade para Conteúdo Web~\cite{wcag22}, conhecidas como 
+WCAG, visto que esse documentos estabelecem parâmetros técnicos para essa inclusão.
+
+Em uma análise preliminar avaliando os sites institucionais da UFJF, foi
+identificado que boa parte apresentavam falhas de acessibilidade, como imagens sem texto
 alternativo e baixo contraste de cores, limitando o acesso de usuários com deficiência
 visual. Além disso, a ausência de relatórios contextualizados dificultava a 
-priorização de correções por parte das equipes responsáveis.
+identificação e correção por parte dos conteúdistas.
 
-Neste cenário, este artigo propõe uma solução técnica inovadora: um sistema
-automatizado de auditoria, integrado ao WordPress (plataforma amplamente utilizada
-pela instituição), que combina:
+Neste cenário, este artigo propõe uma solução técnica inovadora para o contexto
+da UFJF, baseada em um plugin WordPress de acessibilidade que integra tecnologias
+modernas de automação, análise técnica e processamento de dados. O sistema opera
+como um serviço independente, com suporte a regras WCAG 2.1/2.2 e eMAG, e é
+compatível com a API REST do WordPress, permitindo avaliações em tempo real e
+personalização de regras de acessibilidade.
 
-\begin{itemize}
-\item \textbf{Renderização headless da pagina via Puppeteer} para capturar conteúdo
-dinâmico (ex: Single-Page Applications).\cite{puppeteer}
-\item \textbf{Análise técnica com Axe-core\cite{axecore}}, cobrindo mais de 200 regras WCAG 2.1/2.2 e eMAG.\@
-\item \textbf{APIs REST personalizadas} para avaliação de URLs internas, externas e
-conteúdo HTML/CSS bruto.
-\item \textbf{Pós-processamento inteligente} de relatórios, filtrando falsos
-positivos e oferecer sugestões de correção em linguagem acessível.
-\end{itemize}
-
-A ferramenta não apenas otimiza processos técnicos, mas \textbf{democratiza a
-fiscalização de acessibilidade}, empoderando conteudistas não especialistas com
+A ferramenta não apenas otimiza processos técnicos, mas democratiza a
+fiscalização de acessibilidade, empoderando conteudistas não especialistas com
 dados claros e acionáveis. Este trabalho visa, portanto, contribuir para o debate 
-sobre automação e inclusão digital, oferecendo um modelo replicável para instituições
+sobre automação e inclusão digital, sugerindo um modelo replicável para instituições
 públicas e privadas que buscam alinhar-se às exigências legais e éticas da
-acessibilidade web.
+acessibilidade web, dentro do escopo do eMag, WCAG 2.1/2.2 e o contexto de cada
+organização.
 
 \subsection{Contexto Institucional e Desafios Operacionais}\label{subsec:contexto}
 A Universidade Federal de Juiz de Fora (UFJF) gerencia uma ampla rede de sites
