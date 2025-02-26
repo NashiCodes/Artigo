@@ -60,8 +60,8 @@ servidores, da qual chamamos de conteudistas. A diversidade de conteúdos e
 responsáveis torna o processo de garantia de acessibilidade primordial para
 atender a legislação e promover a inclusão digital.
 
-O problema central reside na complexidade de auditorias manuais, que 
-consomem tempo e recursos, e principalmente na falta de ferramentas 
+Neste cenário o temos uma complexidade ao realizar auditorias manuais, que 
+consomem tempo e recursos, e principalmente a falta de ferramentas 
 centralizadas dentro da UFJF para aplicar o Modelo de Acessibilidade em 
 Governo Eletrônico~\cite{emag}, conhecido como eMag, e as Diretrizes 
 de Acessibilidade para Conteúdo Web~\cite{wcag22}, conhecidas como 
@@ -74,21 +74,38 @@ visual. Além disso, a falta de padronização e de um processo de auditoria con
 dificulta a identificação e correção dessas falhas, comprometendo a qualidade e a
 usabilidade dos sites.
 
-Neste cenário, este artigo propõe uma solução técnica inovadora para o contexto
+Diante deste desafio, este artigo propõe uma solução técnica inovadora para o contexto
 da UFJF, baseada em um plugin WordPress de acessibilidade que integra tecnologias
 modernas de automação, análise técnica e processamento de dados. O sistema opera
 como um serviço independente, com suporte a regras WCAG 2.1/2.2 e eMAG, e é
 compatível com a API REST do WordPress, permitindo avaliações em tempo real e
 personalização de regras de acessibilidade.
 
-A ferramenta não apenas otimiza processos técnicos, mas democratiza a
-fiscalização de acessibilidade, empoderando conteudistas não especialistas com
-dados claros e acionáveis. Este trabalho visa, portanto, contribuir para o debate 
-sobre automação e inclusão digital, sugerindo um modelo replicável para instituições
-públicas e privadas que buscam alinhar-se às exigências legais e éticas da
+A ferramenta não apenas otimiza processos técnicos, mas democratiza 
+a fiscalização de acessibilidade, empoderando conteudistas não especialistas 
+com dados claros e de fácil identificação. Este trabalho visa, portanto, contribuir
+para o debate sobre automação e inclusão digital, sugerindo um modelo que buscam alinhar-se às exigências legais e éticas da
 acessibilidade web, dentro do escopo do eMag, WCAG 2.1/2.2 e o contexto de cada
 organização.
 
+\subsection{Metodologia}\label{subsec:metodologia}
+A fim de divulgar as informações referentes aos seus setores e atividades a Universidade Federal de Juiz de Fora, UFJF, através do Centro de Gestão do Conhecimento Organizacional, CGCO, é responsável por controlar a disponibilização de sites, a padronização dos layouts e o suporte técnico. Para a sustentação desse serviço, é utilizado o CMS WordPress.
+
+Diante deste contexto, torna-se fundamental a implementação de um sistema de
+auditoria automatizada de acessibilidade, que possa ser integrado ao WordPress e
+avaliar continuamente a conformidade dos sites com as diretrizes de acessibilidade
+WCAG 2.1/2.2 e eMAG\@. Para isso, a metodologia proposta neste trabalho é dividida
+em três etapas principais: análise de requisitos, desenvolvimento do plugin e
+avaliação da ferramenta.
+
+\subsubsection{Análise de Requisitos}
+A primeira etapa consiste na análise dos requisitos do sistema, com base nas
+necessidades da UFJF e nas diretrizes de acessibilidade WCAG 2.1/2.2 e eMAG\@. Para
+isso, a partir de reuniões com a equipe de TI e conteudistas, chegou-se a um
+conjunto de funcionalidades essenciais para o plugin, como: integração com o
+WordPress, avaliação em tempo real, suporte a regras WCAG 2.1/2.2 e eMAG, relatórios
+claros e simples, personalização de regras a serem avaliadas e a possibilidade de
+visualização de erros e sugestões de correção.
 
 \nocite{*}
 \printbibliography[title={Referências}]
