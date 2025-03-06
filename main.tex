@@ -89,7 +89,11 @@ acessibilidade web, dentro do escopo do eMag, WCAG 2.1/2.2 e o contexto de cada
 organização.
 
 \subsection{Metodologia}\label{subsec:metodologia}
-A fim de divulgar as informações referentes aos seus setores e atividades a Universidade Federal de Juiz de Fora, UFJF, através do Centro de Gestão do Conhecimento Organizacional, CGCO, é responsável por controlar a disponibilização de sites, a padronização dos layouts e o suporte técnico. Para a sustentação desse serviço, é utilizado o CMS WordPress.
+A fim de divulgar as informações referentes aos seus setores e atividades a 
+Universidade Federal de Juiz de Fora, UFJF, através do Centro de Gestão 
+do Conhecimento Organizacional (CGCO), é responsável por controlar a 
+disponibilização de sites, a padronização dos layouts e o suporte técnico. Para
+a sustentação desse serviço, é utilizado o CMS WordPress~\footfullcite{WP}.
 
 Diante deste contexto, torna-se fundamental a implementação de um sistema de
 auditoria automatizada de acessibilidade, que possa ser integrado ao WordPress e
@@ -100,12 +104,52 @@ avaliação da ferramenta.
 
 \subsubsection{Análise de Requisitos}
 A primeira etapa consiste na análise dos requisitos do sistema, com base nas
-necessidades da UFJF e nas diretrizes de acessibilidade WCAG 2.1/2.2 e eMAG\@. Para
-isso, a partir de reuniões com a equipe de TI e conteudistas, chegou-se a um
-conjunto de funcionalidades essenciais para o plugin, como: integração com o
-WordPress, avaliação em tempo real, suporte a regras WCAG 2.1/2.2 e eMAG, relatórios
-claros e simples, personalização de regras a serem avaliadas e a possibilidade de
-visualização de erros e sugestões de correção.
+necessidades da UFJF e nas diretrizes de acessibilidade WCAG 2.1/2.2 e 
+eMAG\@. Para isso, a partir de reuniões com a equipe de TI e conteudistas, 
+chegou-se a um conjunto de funcionalidades essenciais para o plugin, como: 
+integração com o WordPress Multi-Sites, avaliação em tempo real, suporte a 
+regras WCAG 2.1/2.2 e eMAG, relatórios claros e simples, personalização de 
+regras a serem avaliadas e a possibilidade de visualização de erros e sugestões 
+de correção.
+
+O eMag é um modelo de acessibilidade em governo eletrônico que estabelece
+diretrizes para a promoção da acessibilidade em sites governamentais, com o
+objetivo de garantir a inclusão digital e o acesso à informação para todos os
+cidadãos. Já o WCAG 2.1/2.2 é um conjunto de diretrizes internacionais para a
+acessibilidade de conteúdo web, que visa tornar os sites mais acessíveis para
+pessoas com deficiência visual, auditiva, motora e cognitiva. Portanto, ter o
+suporte a essas regras é fundamental para garantir a conformidade dos sites da
+UFJF com as normas de acessibilidade.
+
+Os conteudistas da UFJF responsáveis pela atualização dos sites, muitas vezes não
+possuem conhecimento técnico em relação à elementos HTML, CSS e JavaScript, o que
+torna-se relevante a disponibilização de relatórios claros e simples, que possam
+ser facilmente compreendidos e seguidos para a correção dos erros de acessibilidade,
+e a possibilidade de visualizar os erros e sugestões de correção diretamente no
+painel do WordPress.
+
+A utilização de um sistema como o CMS WordPress dentro da UFJF é uma realidade, e
+portanto, a integração do plugin de acessibilidade com essa plataforma não só
+é desejável, como também é essencial para garantir que os relatórios sejam
+facilmente acessíveis e que as correções possam ser feitas de forma rápida e
+eficiente. É importante notar que o WordPress permite a padronização de layouts,
+e certos elementos das páginas são gerenciados pelos temas desenvolvidos pelos
+desenvolvedores da UFJF, portanto, tais elementos não são passíveis de alteração
+pelos conteudistas, o que torna a avaliação de acessibilidade desses elementos
+não necessária para o conteudista, sendo assim, o plugin permite a personalização
+tanto das regas a serem avaliadas, quanto dos elementos.
+
+A UFJF possui uma quantidade bastante significativa de sites (Inserir Valor), portais e blogs, desta
+forma, salvar os relatórios de acessibilidade em um banco de dados, é uma tarefa que 
+consumiria muitos recursos e espaço em disco, portanto, a utilização de uma API REST
+que apenas gere os relatórios em tempo real, sem a necessidade de armazenamento, é 
+uma solução mais eficiente e escalável.
+ 
+Foi também durante a etapa de análise de requisitos, que analisamos 
+outras ferramentas e tecnologias disponíveis no mercado, como plugins 
+de acessibilidade já existentes para WordPress, sistemas de auditoria de acessibilidade.
+
+Em uma fase preliminar do projeto, realizamos testes com o AccessMonitor~\footfullcite{AM}, uma ferramenta de auditoria de acessibilidade online, que permite a avaliação de sites em tempo real. Embora a solução ofereça uma interface intuitiva para avaliação pontual de páginas web, identificamos limitações significativas para o contexto operacional da UFJF, As principais restrições estavam na ausência de mecanismos de personalização de regras, impedindo a adaptação a contextos específicos, e a escalabilidade restrita, com um limite operacional páginas a serem avaliadas por um endereço IP\@. Adicionalmente, a necessidade de inserção manual de URLs por avaliação tornava inviável a análise de grandes portfólios de sites, realidade comum em instituições de porte universitário.
 
 \nocite{*}
 \printbibliography[title={Referências}]
