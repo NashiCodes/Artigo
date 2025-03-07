@@ -1,27 +1,20 @@
-\documentclass[12pt]{article}
+\documentclass[article,12pt,oneside,a4paper,hyphens]{abntex2}
 \usepackage[utf8]{inputenc}
-\usepackage{csquotes}
-\usepackage[brazil]{babel}
-\usepackage{graphicx}
-\usepackage[
-    backend=biber,
-    style=abnt,
-    language=brazil,
-    ]{biblatex}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage{abntex2cite}
 
-\addbibresource{references.bib}
+\bibliography{references.bib}
 
-
-\title{Plugin de acessibilidade para sites Governamentais}
-\author{João Victor Pereira dos Anjos}
-\date{Jan 2025}
+\titulo{Plugin de acessibilidade para sites Governamentais}
+\autor{João Victor Pereira dos Anjos}
+\local{Juiz de Fora}
+\data{\today}
 
 
 \begin{document}
 
-\maketitle
-  
-\tableofcontents
+\imprimircapa{}
 
 \section{Resumo}
    
@@ -93,7 +86,7 @@ A fim de divulgar as informações referentes aos seus setores e atividades a
 Universidade Federal de Juiz de Fora, UFJF, através do Centro de Gestão 
 do Conhecimento Organizacional (CGCO), é responsável por controlar a 
 disponibilização de sites, a padronização dos layouts e o suporte técnico. Para
-a sustentação desse serviço, é utilizado o CMS WordPress~\footfullcite{WP}.
+a sustentação desse serviço, é utilizado o CMS WordPress~\autocite{WP}.
 
 Diante deste contexto, torna-se fundamental a implementação de um sistema de
 auditoria automatizada de acessibilidade, que possa ser integrado ao WordPress e
@@ -149,9 +142,17 @@ Foi também durante a etapa de análise de requisitos, que analisamos
 outras ferramentas e tecnologias disponíveis no mercado, como plugins 
 de acessibilidade já existentes para WordPress, sistemas de auditoria de acessibilidade.
 
-Em uma fase preliminar do projeto, realizamos testes com o AccessMonitor~\footfullcite{AM}, uma ferramenta de auditoria de acessibilidade online, que permite a avaliação de sites em tempo real. Embora a solução ofereça uma interface intuitiva para avaliação pontual de páginas web, identificamos limitações significativas para o contexto operacional da UFJF, As principais restrições estavam na ausência de mecanismos de personalização de regras, impedindo a adaptação a contextos específicos, e a escalabilidade restrita, com um limite operacional páginas a serem avaliadas por um endereço IP\@. Adicionalmente, a necessidade de inserção manual de URLs por avaliação tornava inviável a análise de grandes portfólios de sites, realidade comum em instituições de porte universitário.
+Em uma fase preliminar do projeto, realizamos testes com o AccessMonitor~\autocite{AM}, 
+uma ferramenta de auditoria de acessibilidade online, que permite a avaliação de 
+sites em tempo real. Embora a solução ofereça uma interface intuitiva para 
+avaliação pontual de páginas web, identificamos limitações significativas para o 
+contexto operacional da UFJF, As principais restrições estavam na ausência de 
+mecanismos de personalização de regras, impedindo a adaptação a contextos 
+específicos, e a escalabilidade restrita, com um limite operacional páginas a 
+serem avaliadas por um endereço IP\@. Adicionalmente, a necessidade de inserção 
+manual de URLs por avaliação tornava inviável a análise de grandes portfólios de 
+sites, realidade comum em instituições de porte universitário.
 
 \nocite{*}
-\printbibliography[title={Referências}]
 
 \end{document}
