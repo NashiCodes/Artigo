@@ -1,20 +1,29 @@
-\documentclass[article,12pt,oneside,a4paper,hyphens]{abntex2}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{hyperref}
-\usepackage[hyphenbreaks]{breakurl}
-\usepackage{abntex2cite}
+\usepackage{csquotes}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage[
+    backend=biber,
+    style=abnt,
+    language=brazil,
+    ]{biblatex}
 
-\bibliography{references.bib}
+\addbibresource{references.bib}
 
-\titulo{Plugin de acessibilidade para sites Governamentais}
-\autor{João Victor Pereira dos Anjos}
-\local{Juiz de Fora}
-\data{\today}
+
+\title{Plugin de acessibilidade para sites Governamentais}
+\author{João Victor Pereira dos Anjos}
+\date{Jan 2025}
 
 
 \begin{document}
 
-\imprimircapa{}
+\maketitle
+  
+\tableofcontents
+
+\section{Resumo}
 
 \section{Resumo}
    
@@ -154,5 +163,6 @@ manual de URLs por avaliação tornava inviável a análise de grandes portfóli
 sites, realidade comum em instituições de porte universitário.
 
 \nocite{*}
+\printbibliography[title={Referências}]
 
 \end{document}
