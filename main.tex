@@ -162,6 +162,51 @@ serem avaliadas por um endereço IP\@. Adicionalmente, a necessidade de inserç�
 manual de URLs por avaliação tornava inviável a análise de grandes portfólios de 
 sites, realidade comum em instituições de porte universitário.
 
+Tentamos também a utilização do QualWeb, que é a ferramenta de avaliação por
+trás do AccessMonitor, porém, esbarramos em limitações técnicas, semelhantes
+às encontradas no AccessMonitor, e principalmente, na falta de suporte na tradução
+de relatórios para o português, o que dificultaria a compreensão dos conteudistas
+da UFJF\@.
+
+Diante dessas limitações, optamos por desenvolver um plugin de acessibilidade
+personalizado, que atendesse às necessidades específicas da UFJF e que fosse
+compatível com a infraestrutura tecnológica existente, como o WordPress Multi-Sites
+e a API REST\@. Para auxiliar no desenvolvimento da API REST que gera os relatórios
+de acessibilidade, buscamos por ferramentas e tecnologias que avaliasse a acessibilidade
+do conteúdo DOM de uma página web.
+
+Encontramos o IBM Equal Access Toolkit~\autocite{IBMa}, uma ferramenta de código aberto
+desenvolvida pela IBM, que permite a avaliação de acessibilidade de páginas web
+em tempo real, com suporte a regras WCAG 2.1/2.2 e eMAG\@. A ferramenta oferece
+o accessibility-checker~\autocite{AC} um pacote Node que permite a testes automatizados de acessibilidade. o pacote permite também a personalização de regras a serem avaliadas,
+porém, a dificuldade de integração com a nossa API, e a falta de suporte para o 
+português, impediu de seguirmos com essa ferramenta.
+
+A ferramenta da qual decidimos utilizar foi o axe-core~\autocite{axecore}, a terceira
+ferramenta de avaliação de acessibilidade que testamos. O axe-core é uma biblioteca
+de código aberto, desenvolvida pela Deque Systems, que permite a avaliação de acessibilidade
+de páginas web. O ponto chave que nos fez optar por essa ferramenta, foi a facilidade
+de integração com a nossa API REST, a possibilidade de personalização de regras a serem
+avaliadas, e o suporte para o português, o que facilitaria a compreensão dos conteudistas
+da UFJF\@.
+
+\subsubsection{Desenvolvimento do Plugin}
+Nessa etapa, designamos nossos esforços para a busca de tecnologias e ferramentas
+que pudessem ser utilizadas para o desenvolvimento do plugin de acessibilidade, assim
+como o desenvolvimento da arquitetura do sistema, a implementação das funcionalidades
+e a integração com o WordPress Multi-Sites.
+
+Para a integração com o WordPress Multi-Sites, fizemos uso da possibilidade do WordPress
+de adicionar novos endpoints à sua API para cada site. Sendo assim, criamos um endpoint
+personalizado para cada site, que permitisse a captura de todas as urls de páginas e posts
+de cada site. Sendo assim, a API de relatórios do plugin, poderia requisitar essas urls
+para avaliação em tempo real.
+
+Subsequentemente, para desenvolvermos o sistema que gera os relatórios de acessibilidade,
+optamos por utilizar a linguagem de programação JavaScript, em conjunto com o framework 
+Express.js, que é um framework web para Node.js, que permite a criação de aplicações web
+de forma rápida e eficiente.
+
 \nocite{*}
 \printbibliography[title={Referências}]
 
