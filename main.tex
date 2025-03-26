@@ -13,7 +13,7 @@
 \addbibresource{references.bib}
 
 
-\title{Plugin de acessibilidade para sites Governamentais}
+\title{Plugin de acessibilidade para sites institucionais da UFJF}
 \author{João Victor Pereira dos Anjos}
 \date{Jan 2025}
 
@@ -21,44 +21,44 @@
 \begin{document}
 
 \maketitle
-  
+
 \tableofcontents
 
 \section{Resumo}
 
 \section{Resumo}
-   
+
 This is the first section.
-      
-Lorem  ipsum  dolor  sit  amet,  consectetuer  adipiscing  
-elit.   Etiam  lobortisfacilisis sem.  Nullam nec mi et 
-neque pharetra sollicitudin.  Praesent imperdietmi nec ante. 
+
+Lorem  ipsum  dolor  sit  amet,  consectetuer  adipiscing
+elit.   Etiam  lobortisfacilisis sem.  Nullam nec mi et
+neque pharetra sollicitudin.  Praesent imperdietmi nec ante.
 Donec ullamcorper, felis non sodales..
 
 \section{Introdução}
 
-A palavra acessibilidade, sua origem etimológica é derivada do latim \textit{accessiblitas} 
-e significa ``condição para utilização, com segurança e autonomia, 
-total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das 
+A palavra acessibilidade, sua origem etimológica é derivada do latim \textit{accessiblitas}
+e significa ``condição para utilização, com segurança e autonomia,
+total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das
 edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de
 comunicação e informação, por pessoa com deficiência ou mobilidade reduzida''\cite{Acessibilidade}.
 
-No Brasil, a acessibilidade é um direito garantido pela Constituição 
+No Brasil, a acessibilidade é um direito garantido pela Constituição
 Federal de 1988, pela Lei Brasileira de Inclusão (LBI) de 2015 \Cite{LBI}
-e por normas técnicas específicas, como a NBR 9050/2015 da Associação 
-Brasileira de Normas Técnicas~\cite{ABNT}. Essas legislações estabelecem 
+e por normas técnicas específicas, como a NBR 9050/2015 da Associação
+Brasileira de Normas Técnicas~\cite{ABNT}. Essas legislações estabelecem
 parâmetros para a promoção da acessibilidade em espaços públicos e privados,
-visando a inclusão de pessoas com deficiência física, visual, auditiva, 
+visando a inclusão de pessoas com deficiência física, visual, auditiva,
 intelectual e múltipla.
 
-No âmbito digital a acessibilidade web é um pilar fundamental para a 
+No âmbito digital a acessibilidade web é um pilar fundamental para a
 inclusão, o WCAG 2.1/2.2 \autocite{wcag22} sendo um conjunto de diretrizes
-internacionais para a acessibilidade de conteúdo web, tem por objetivo, 
+internacionais para a acessibilidade de conteúdo web, tem por objetivo,
 tornar os sites mais acessíveis para as pessoas com deficiência visual, auditiva,
-motora e cognitiva, garantindo a igualdade de acesso à informação e aos 
-serviços online. O eMag é um modelo nacional de acessibilidade em governo 
-eletrônico que estabelece diretrizes para a promoção da acessibilidade em 
-sites governamentais, com o objetivo de garantir a inclusão digital e o acesso 
+motora e cognitiva, garantindo a igualdade de acesso à informação e aos
+serviços online. O eMag é um modelo nacional de acessibilidade em governo
+eletrônico que estabelece diretrizes para a promoção da acessibilidade em
+sites governamentais, com o objetivo de garantir a inclusão digital e o acesso
 à informação para todos os cidadãos Brasileiros.
 
 A Universidade Federal de Juiz de Fora (UFJF), como uma instituição pública,
@@ -68,19 +68,19 @@ servidores, da qual chamamos de conteudistas. A diversidade de conteúdos e
 responsáveis torna o processo de garantia de acessibilidade primordial para
 atender a legislação e promover a inclusão digital.
 
-A fim de divulgar as informações referentes aos seus setores e atividades a 
-Universidade Federal de Juiz de Fora, UFJF, através do Centro de Gestão 
-do Conhecimento Organizacional (CGCO), é responsável por controlar a 
+A fim de divulgar as informações referentes aos seus setores e atividades a
+Universidade Federal de Juiz de Fora, UFJF, através do Centro de Gestão
+do Conhecimento Organizacional (CGCO), é responsável por controlar a
 disponibilização de sites, a padronização dos layouts e o suporte técnico. Para
 a sustentação desse serviço, é utilizado o CMS WordPress~\autocite{WP},
 uma plataforma de gerenciamento de conteúdo que permite a criação e
 manutenção de sites de forma simplificada e intuitiva.
 
-Neste cenário o temos uma complexidade ao realizar auditorias manuais, que 
-consomem tempo e recursos, e principalmente a falta de ferramentas 
-centralizadas dentro da UFJF para aplicar o Modelo de Acessibilidade em 
-Governo Eletrônico~\cite{emag}, conhecido como eMag, e as Diretrizes 
-de Acessibilidade para Conteúdo Web~\cite{wcag22}, conhecidas como 
+Neste cenário o temos uma complexidade ao realizar auditorias manuais, que
+consomem tempo e recursos, e principalmente a falta de ferramentas
+centralizadas dentro da UFJF para aplicar o Modelo de Acessibilidade em
+Governo Eletrônico~\cite{emag}, conhecido como eMag, e as Diretrizes
+de Acessibilidade para Conteúdo Web~\cite{wcag22}, conhecidas como
 WCAG, visto que esse documentos estabelecem parâmetros técnicos para essa inclusão.
 
 Em uma análise preliminar avaliando a presença de elementos de acessibilidade nos
@@ -90,28 +90,28 @@ visual. Além disso, a falta de padronização e de um processo de auditoria con
 dificulta a identificação e correção dessas falhas, comprometendo a qualidade e a
 usabilidade dos sites.
 
-Diante deste desafio, este artigo propõe uma solução técnica inovadora 
+Diante deste desafio, este artigo propõe uma solução técnica inovadora
 para o contexto da UFJF, baseada em um plugin WordPress de auditoria
 de acessibilidade que integra tecnologias modernas de automação,
-análise técnica e processamento de dados. O sistema opera como um serviço 
-independente, com suporte a regras WCAG 2.1/2.2 e eMAG, permitindo 
+análise técnica e processamento de dados. O sistema opera como um serviço
+independente, com suporte a regras WCAG 2.1/2.2 e eMAG, permitindo
 avaliações em tempo real e personalização de regras de acessibilidade.
 
-A ferramenta não apenas otimiza processos técnicos, mas democratiza 
-a fiscalização de acessibilidade, empoderando conteudistas não especialistas 
+A ferramenta não apenas otimiza processos técnicos, mas democratiza
+a fiscalização de acessibilidade, empoderando conteudistas não especialistas
 com dados claros e de fácil identificação. Este trabalho visa, portanto, contribuir
 para o debate sobre automação e inclusão digital, sugerindo um modelo que buscam alinhar-se às exigências legais e éticas da
 acessibilidade web, dentro do escopo do eMag, WCAG 2.1/2.2 e o contexto de cada
 organização.
 
 \subsection{Metodologia}\label{subsec:metodologia}
-Diante do contexto apresentado a seguinte metodologia proposta neste trabalho 
+Diante do contexto apresentado a seguinte metodologia proposta neste trabalho
 para a implementação do sistema de auditoria de acessibilidade, é dividida
 em três etapas principais: análise de requisitos, onde são identificadas as
 necessidades da UFJF e feitos testes com ferramentas de acessibilidade já
 existentes; desenvolvimento do plugin, onde são definidas as tecnologias à serem
 utilizadas, a arquitetura do sistema, a implementação das funcionalidades e a
-integração com o WordPress Multi-Sites; e por fim, a avaliação da ferramenta,
+integração com o WordPress Multi-Sites~\autocite{wp-ms}; e por fim, a avaliação da ferramenta,
 onde são feitos testes de usabilidade e de acessibilidade, com o objetivo de
 validar a eficácia do plugin.
 
@@ -123,71 +123,73 @@ produto final que atenda às expectativas e necessidades da UFJF\@.
 
 \subsubsection{Análise de Requisitos}
 A primeira etapa consiste na análise dos requisitos do sistema, com base nas
-necessidades da UFJF e nas diretrizes de acessibilidade. Para isso, a partir 
+necessidades da UFJF e nas diretrizes de acessibilidade. Para isso, a partir
 de reuniões com a equipe de TI e conteudistas, chegou-se a um conjunto de
-funcionalidades essenciais para o plugin, como: integração com o WordPress 
-Multi-Sites, avaliação em tempo real, suporte as diretrizes de acessibilidade, 
-relatórios claros e simples, personalização de regras a serem avaliadas e a 
+funcionalidades essenciais para o plugin, como: integração com o WordPress
+Multi-Sites, avaliação em tempo real, suporte as diretrizes de acessibilidade,
+relatórios claros e simples, personalização de regras a serem avaliadas e a
 possibilidade de visualização de erros e sugestões de correção.
 
 Como ja citado, ter o suporte as regras WCAG 2.1/2.2 e eMAG é fundamental para
 garantir a conformidade dos sites da UFJF com as normas de acessibilidade.
-Além disso, a utilização de um sistema como o CMS WordPress dentro da UFJF 
-é uma realidade, e portanto, a integração do plugin de acessibilidade com 
-essa plataforma não só é desejável, como também é essencial para garantir 
-que os relatórios possam ser facilmente compreendidos, visto que os 
+Além disso, a utilização de um sistema como o CMS WordPress dentro da UFJF
+é uma realidade, e portanto, a integração do plugin de acessibilidade com
+essa plataforma não só é desejável, como também é essencial para garantir
+que os relatórios possam ser facilmente compreendidos, visto que os
 conteudistas da UFJF responsáveis pela atualização dos sites, muitas
 vezes não possuem conhecimento técnico em relação à elementos HTML,
 CSS e JavaScript, o que torna-se relevante a disponibilização dos
-relatórios de forma claros e simples, e facilmente seguidos para a 
+relatórios de forma clara e simples, e facilmente seguidos para a
 correção dos erros.
 
 É importante notar que o WordPress permite a padronização de layouts,
 e certos elementos das páginas são gerenciados pelos temas desenvolvidos pelos
 desenvolvedores da UFJF, portanto, tais elementos não são passíveis de alteração
 pelos conteudistas, o que torna a avaliação de acessibilidade desses elementos
-não necessária para o conteudista, sendo assim, o plugin deve permitir a 
+não necessária para o conteudista, sendo assim, o plugin deve permitir a
 personalização tanto das regas a serem avaliadas, quanto dos elementos.
 
 Uma API REST~\autocite{api}, é uma interface de programação de aplicações, que
 permite a comunicação entre sistemas, e é amplamente utilizada para integração
-de sistemas e serviços. A utilização de uma API REST somente para a geração 
-dos relatórios em tempo real, sem a necessidade de armazenamento, é uma 
+de sistemas e serviços. A utilização de uma API REST somente para a geração
+dos relatórios em tempo real, sem a necessidade de armazenamento, é uma
 solução mais eficiente e escalável, visto que a UFJF possui uma quantidade
-bastante significativa de sites (Inserir Valor), e armazenar todos os 
-relatórios de acessibilidade em um banco de dados, é tarefa que consumiria 
+bastante significativa de sites (Inserir Valor), e armazenar todos os
+relatórios de acessibilidade em um banco de dados, é tarefa que consumiria
 muitos recursos e espaço em disco, tornando inviável tal abordagem.
 
-Em fase preliminar ao desenvolvimento do projeto, realizamos testes com o 
-AccessMonitor~\autocite{AM}, 
-uma ferramenta de auditoria de acessibilidade online, que permite a avaliação de 
-sites em tempo real. Embora a solução ofereça uma interface intuitiva para 
-avaliação pontual de páginas web, identificamos limitações significativas para o 
-contexto operacional da UFJF, As principais restrições estavam na ausência de 
-mecanismos de personalização de regras, impedindo a adaptação a contextos 
-específicos, e a escalabilidade restrita, com um limite operacional páginas a 
-serem avaliadas por um endereço IP\@. Adicionalmente, a necessidade de inserção 
-manual de URLs por avaliação tornava inviável a análise de grandes portfólios de 
-sites, realidade da UFJF\@.
+Em fase preliminar ao desenvolvimento do projeto, realizamos testes com o
+AccessMonitor~\autocite{AM},
+uma ferramenta de auditoria de acessibilidade online, que permite a avaliação de
+sites em tempo real. Embora a solução ofereça uma interface intuitiva para
+avaliação pontual de páginas web, identificamos limitações significativas para o
+contexto operacional da UFJF. As principais restrições estavam na ausência de
+mecanismos de personalização de regras, impedindo a adaptação a contextos
+específicos, e a escalabilidade restrita, com um limite operacional páginas a
+serem avaliadas por um endereço IP\@. Adicionalmente, a necessidade de inserção
+manual de URLs por avaliação tornava inviável a análise de grandes portfólios de
+sites\@.
 
-Testamos também a utilização do QualWeb~\autocite{qualweb}, que é a ferramenta 
-de avaliação portrás do AccessMonitor, porém, esbarramos em limitações técnicas, 
-semelhantesàs encontradas no AccessMonitor, e principalmente, na falta de suporte 
-na traduçãode relatórios para o português, o que dificultaria a compreensão dos 
+Testamos também a utilização do QualWeb~\autocite{qualweb}, que é a ferramenta
+de avaliação portrás do AccessMonitor, porém, esbarramos em limitações técnicas,
+semelhantesàs encontradas no AccessMonitor, e principalmente, na falta de suporte
+na traduçãode relatórios para o português, o que dificultaria a compreensão dos
 conteudistas da UFJF\@.
 
 Diante dessas limitações, optamos por desenvolver um plugin de acessibilidade
 personalizado, que atendesse às necessidades específicas da UFJF e que fosse
-compatível com a infraestrutura tecnológica existente. Para auxiliar no 
-desenvolvimento da API REST que gera os relatórios de acessibilidade, 
-buscamos por ferramentas e tecnologias que avaliasse a acessibilidade 
-do conteúdo DOM de uma página web.
+compatível com a infraestrutura tecnológica existente. Para auxiliar no
+desenvolvimento da API REST que gera os relatórios de acessibilidade,
+buscamos por ferramentas e tecnologias que avaliasse a acessibilidade
+do conteúdo DOM~\autocite{DOM} de uma página web.
 
-Encontramos o IBM Equal Access Toolkit~\autocite{IBMa}, uma ferramenta de código 
+Encontramos o IBM Equal Access Toolkit~\autocite{IBMa}, uma ferramenta de código
 aberto desenvolvida pela IBM, que permite a avaliação de acessibilidade de páginas
 web em tempo real, com suporte as diretrizes de acessibilidade. A ferramenta oferece
-o accessibility-checker~\autocite{AC} um pacote Node~\autocite{Node} que permite a testes automatizados de acessibilidade. o pacote permite também a personalização de regras a serem avaliadas,
-porém, a dificuldade de integração com a nossa API, e a falta de suporte para o 
+o accessibility-checker~\autocite{AC} um pacote Node~\autocite{Node} que permite a
+testes automatizados de acessibilidade. o pacote permite também a personalização de
+regras a serem avaliadas,
+porém, a dificuldade de integração com a nossa API, e a falta de suporte para o
 português, impediu de seguirmos com essa ferramenta.
 
 A ferramenta da qual decidimos utilizar foi o axe-core~\autocite{axecore}, a quarta
@@ -203,23 +205,74 @@ A segunda etapa consiste no desenvolvimento do plugin de acessibilidade, que
 integra tecnologias modernas de automação, análise técnica e processamento de
 dados. Para isso, optamos por utilizar a linguagem de programação JavaScript, em
 em conjunto com o framework Express.js~\autocite{express}, que é um framework web
-para Node.js~\autocite{Node}, que permite a criação de aplicações web de forma rápida
+para Node.js, que permite a criação de aplicações web de forma rápida
 e eficiente.
 
-Para entendermos a integração com o WordPress Multi-Sites~\autocite{wp-ms}, prescisamos 
-entender o conceito de Endpoints, Rotas e o que significa Multi-Sites no contexto do 
-WordPress.Um endpoint~\autocite{endpoints} é uma URL específica que é usada para acessar 
-recursos em uma API, como por exemplo, uma lista de posts ou páginas de um site. Uma 
-rota~\autocite{routes} é um caminho específico que é usado para acessar um endpoint, 
+Para entendermos a integração com o WordPress Multi-Sites, prescisamos entender
+o conceito de Endpoints, Rotas e o que significa Multi-Sites no contexto do WordPress.
+Um endpoint~\autocite{endpoints} é uma URL específica que é usada para acessar
+recursos em uma API, como por exemplo, uma lista de posts ou páginas de um site. Uma
+rota~\autocite{routes} é um caminho específico que é usado para acessar um endpoint,
 e é definida no arquivo de rotas da aplicação. O WordPress Multi-Sites é uma funcionalidade
 do WordPress que permite a criação de vários sites a partir de uma única instalação,
-e cada site possui um ID único e um domínio específico, além de possuir seu próprio 
+e cada site possui um ID único e um domínio específico, além de possuir seu próprio
 conjunto de posts e páginas.
 
-% Subsequentemente, para desenvolvermos o sistema que gera os relatórios de acessibilidade,
-% optamos por utilizar a linguagem de programação JavaScript, em conjunto com o framework 
-% Express.js, que é um framework web para Node.js, que permite a criação de aplicações web
-% de forma rápida e eficiente.
+Partindo desse entendimento, para o desenvolvimento do sistema, o
+dividimos em duas partes, o plugin no gerenciador de conteúdo WordPress,e a
+API REST hospedada em um servidor externo. O plugin é responsável por
+consultar a API REST, e exibir os relatórios de acessibilidade na interface do
+WordPress, enquanto a API REST é responsável por receber as requisições
+do plugin, avaliar a acessibilidade das páginas web e retornar os relatórios
+para o plugin.
+
+A arquitetura da API REST é composta por quatro camadas principais: a camada
+de roteamento a camada de autorização e autenticação, a camada de controle,
+e a camada de serviços.
+
+A camada de roteamento é responsável por definir as rotas da API, que
+são os endpoints que podem ser acessados pelo plugin. As rotas são definidas
+no arquivo de rotas da aplicação, e cada rota é associada a um método
+HTTP~\autocite{HTTP}, como GET, POST, PUT ou DELETE. Para
+podermos entendermos melhor o funcionamento das rotas, precisamos entender
+o que a camada de autorização e autenticação faz.
+
+Cada requisição feita ao plugin é autenticada e autorizada por tal camada.
+A API possui a rota de login, que é responsável por receber as credenciais
+necessárias para autenticar o usuário, e utilizando o conceito de JWT~\autocite{JWT},
+a API gera e retorna um token de acesso, que é utilizado para autorizar as
+requisições feitas pelo plugin. Antes de cada requisição ser processada pela
+API, o token de acesso é verificado por um middleware~\autocite{mw},
+que garante que apenas tokens válidos possam acessar as rotas protegidas.
+
+Revisitando a camada de roteamento, é possível observar que, embora
+existam múltiplas rotas disponíveis, as mais relevantes são aquelas dedicadas
+à avaliação de acessibilidade: uma destinada a analisar uma página ou post
+específico e outra voltada para a verificação integral de todos os posts de um
+site. Ambas compartilham um elemento central em sua estrutura: o ID do
+site, que atua como parâmetro obrigatório e chave para identificar o contexto
+da análise. Além disso, seguem um núcleo operacional comum, no qual são
+acionados os processos de geração de relatórios detalhados de acessibilidade,
+garantindo consistência e padronização nos resultados.
+
+A distinção entre as duas rotas reside em um detalhe fundamental: a rota
+de avaliação de um post específico exige um complemento informativo — a
+URL da página em questão, que será discutida em detalhes quando abordarmos
+a camada de servços. Por outro lado, a rota de avaliação de todos os posts
+de um site opera de forma mais abrangente, percorrendo todas as páginas
+disponíveis e gerando relatórios. Essa diferença de escopo é essencial para
+atender às demandas específicas dos conteudistas e dos desenvolvedores da UFJF\@.
+
+A camada de controle funciona como o núcleo organizador do sistema,
+responsável por intermediar a comunicação entre as requisições enviadas pelo
+plugin e a execução das operações necessárias para avaliar a acessibilidade.
+Ela inicia seu processo ao receber e interpretar as solicitações, direcionando-as
+de forma estratégica aos serviços adequados, garantindo que cada etapa do
+processamento ocorra com eficiência. Além de definir qual serviço deve ser
+acionado em cada contexto, essa camada também estrutura o fluxo de dados,
+determinando como eles serão validados, transformados ou enriquecidos antes
+de serem enviados de volta ao plugin.
+
 
 \nocite{*}
 \printbibliography[title={Referências}]
