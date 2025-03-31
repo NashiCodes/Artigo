@@ -1,4 +1,6 @@
 \documentclass[12pt]{article}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
 \usepackage{hyphenat}
@@ -97,13 +99,6 @@ análise técnica e processamento de dados. O sistema opera como um serviço
 independente, com suporte a regras WCAG 2.1/2.2 e eMAG, permitindo
 avaliações em tempo real e personalização de regras de acessibilidade.
 
-A ferramenta não apenas otimiza processos técnicos, mas democratiza
-a fiscalização de acessibilidade, empoderando conteudistas não especialistas
-com dados claros e de fácil identificação. Este trabalho visa, portanto, contribuir
-para o debate sobre automação e inclusão digital, sugerindo um modelo que buscam alinhar-se às exigências legais e éticas da
-acessibilidade web, dentro do escopo do eMag, WCAG 2.1/2.2 e o contexto de cada
-organização.
-
 \subsection{Metodologia}\label{subsec:metodologia}
 Diante do contexto apresentado a seguinte metodologia proposta neste trabalho
 para a implementação do sistema de auditoria de acessibilidade, é dividida
@@ -111,9 +106,10 @@ em três etapas principais: análise de requisitos, onde são identificadas as
 necessidades da UFJF e feitos testes com ferramentas de acessibilidade já
 existentes; desenvolvimento do plugin, onde são definidas as tecnologias à serem
 utilizadas, a arquitetura do sistema, a implementação das funcionalidades e a
-integração com o WordPress Multi-Sites~\autocite{wp-ms}; e por fim, a avaliação da ferramenta,
-onde são feitos testes de usabilidade e de acessibilidade, com o objetivo de
-validar a eficácia do plugin.
+integração com o WordPress Multi-Sites~\autocite{wp-ms}; e por fim, 
+a avaliação da ferramenta,
+onde são feitos testes de usabilidade, acessibilidade, desempenho e 
+escalabilidade do sistema.
 
 Fragmentando a metodologia em etapas, é possível garantir um desenvolvimento
 mais organizado e eficiente, com foco na qualidade e na usabilidade do sistema.
@@ -173,7 +169,7 @@ sites\@.
 Testamos também a utilização do QualWeb~\autocite{qualweb}, que é a ferramenta
 de avaliação portrás do AccessMonitor, porém, esbarramos em limitações técnicas,
 semelhantesàs encontradas no AccessMonitor, e principalmente, na falta de suporte
-na traduçãode relatórios para o português, o que dificultaria a compreensão dos
+na tradução de relatórios para o português, o que dificultaria a compreensão dos
 conteudistas da UFJF\@.
 
 Diante dessas limitações, optamos por desenvolver um plugin de acessibilidade
@@ -226,27 +222,7 @@ WordPress, enquanto a API REST é responsável por receber as requisições
 do plugin, avaliar a acessibilidade das páginas web e retornar os relatórios
 para o plugin.
 
-A arquitetura da API REST é composta por quatro camadas principais: a camada
-de roteamento a camada de autorização e autenticação, a camada de controle,
-e a camada de serviços.
-
-A camada de roteamento é responsável por definir as rotas da API, que
-são os endpoints que podem ser acessados pelo plugin. As rotas são definidas
-no arquivo de rotas da aplicação, e cada rota é associada a um método
-HTTP~\autocite{HTTP}, como GET, POST, PUT ou DELETE. Para
-podermos entendermos melhor o funcionamento das rotas, precisamos entender
-o que a camada de autorização e autenticação faz.
-
-Cada requisição feita ao plugin é autenticada e autorizada por tal camada.
-A API possui a rota de login, que é responsável por receber as credenciais
-necessárias para autenticar o usuário, e utilizando o conceito de JWT~\autocite{JWT},
-a API gera e retorna um token de acesso, que é utilizado para autorizar as
-requisições feitas pelo plugin. Antes de cada requisição ser processada pela
-API, o token de acesso é verificado por um middleware~\autocite{mw},
-que garante que apenas tokens válidos possam acessar as rotas protegidas.
-
-Revisitando a camada de roteamento, é possível observar que, embora
-existam múltiplas rotas disponíveis, as mais relevantes são aquelas dedicadas
+Das rotas disponíveis na API, as mais relevantes são aquelas dedicadas
 à avaliação de acessibilidade: uma destinada a analisar uma página ou post
 específico e outra voltada para a verificação integral de todos os posts de um
 site. Ambas compartilham um elemento central em sua estrutura: o ID do
@@ -256,23 +232,154 @@ acionados os processos de geração de relatórios detalhados de acessibilidade,
 garantindo consistência e padronização nos resultados.
 
 A distinção entre as duas rotas reside em um detalhe fundamental: a rota
-de avaliação de um post específico exige um complemento informativo — a
-URL da página em questão, que será discutida em detalhes quando abordarmos
-a camada de servços. Por outro lado, a rota de avaliação de todos os posts
-de um site opera de forma mais abrangente, percorrendo todas as páginas
-disponíveis e gerando relatórios. Essa diferença de escopo é essencial para
-atender às demandas específicas dos conteudistas e dos desenvolvedores da UFJF\@.
+de avaliação de um post específico possui um escopo mais restrito, focando
+apenas naquele post em particular, e principalmente, é por esssa rota que 
+o plugin é acionado, permitindo que o conteudista realize a avaliação de 
+acessibilidade de um post específico, e visualize o relatório na interface do 
+WordPress. Por outro lado, a rota de avaliação de todos os posts de um site
+opera de forma mais abrangente, percorrendo todas as páginas disponíveis 
+e gerando relatórios. Essa diferença de escopo é essencial para atender às 
+demandas específicas dos conteudistas e dos desenvolvedores da UFJF.
+\bigbreak
 
-A camada de controle funciona como o núcleo organizador do sistema,
-responsável por intermediar a comunicação entre as requisições enviadas pelo
-plugin e a execução das operações necessárias para avaliar a acessibilidade.
-Ela inicia seu processo ao receber e interpretar as solicitações, direcionando-as
-de forma estratégica aos serviços adequados, garantindo que cada etapa do
-processamento ocorra com eficiência. Além de definir qual serviço deve ser
-acionado em cada contexto, essa camada também estrutura o fluxo de dados,
-determinando como eles serão validados, transformados ou enriquecidos antes
-de serem enviados de volta ao plugin.
+\tikzstyle{plugin} = [rectangle, rounded corners, minimum width=3cm,
+    minimum height=1cm,text centered, draw=black, fill=gray!30]
+\tikzstyle{api} = [rectangle, rounded corners, minimum width=3cm,
+    minimum height=1cm,text centered, draw=black, fill=gray!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{puppeteer} = [rectangle, rounded corners, minimum width=3cm,
+    minimum height=1cm,text centered, draw=black, fill=gray!30]
+\tikzstyle{axe} = [rectangle, rounded corners, minimum width=3cm,
+    minimum height=1cm,text centered, draw=black, fill=gray!30]
+\begin{tikzpicture}[node distance=2cm]
+    \node (plugin) [plugin,xshift=-2] {Plugin};
+    \node (api) [api, below of=plugin] {API REST};
+    \node (axe) [axe, left of=api, xshift=-3cm] {axe-core};
+    \node (puppeteer) [puppeteer, below of=api] {Puppeteer};
 
+    \draw [-latex,bend left] (plugin) edge node[anchor=west]{Url da página} (api);
+    \draw [-latex,bend left] (api) edge node[anchor=east]{Relatório}(plugin);
+    \draw [arrow] (api) -- node[anchor=west]{Url da página}(puppeteer);
+    \draw [arrow] (puppeteer) -| node[anchor=north]{Navegador Headless}(axe);
+    \draw [arrow] (axe) -- node[anchor=north]{Avaliação}(api);
+
+    % Desenha a seta em si mesma em Api com o titulo "Relatório Limpo"
+
+    \draw[->] (api) to[in=15,out=-15,looseness=4.8] node[midway,right] {Relatório tratado} (api);
+
+
+\end{tikzpicture}
+
+Fluxo de execução da api
+\bigbreak
+
+Seguindo como base o fluxo de execução da API apresentado na figura
+acima, a requisição do plugin é recebida pela API REST, que se utiliza
+do Puppeteer~\autocite{puppeteer}, uma biblioteca Node.js que fornece uma
+API de alto nível para controlar o Chrome~\autocite{chrome} através do protocolo
+DevTools~\autocite{devtools}. O Puppeteer é utilizado para abrir uma nova aba no navegador de forma
+headless~\autocite{headless}, ou seja, sem interface gráfica, e carregar a URL da página
+especificada na requisição. Após o carregamento da página, a API
+executa a ferramenta axe-core, usando como parametro a página carregada
+pelo Puppeteer e a personalização definida pelo CGCO, e gera uma avaliação
+de acessibilidade. O resultado da avaliação é retornado para a API, que
+processa o relatório removendo informações irrelevantes e organizando os dados
+para a integração com o plugin. O relatório final então é enviado de
+volta para o plugin, que exibe as informações na interface do WordPress.
+
+As principais personalizações implementadas no API serão: 
+tradução dos relatórios para o português; Quais regras de acessibilidade 
+não serão avaliadas como: "blink", que avalia se o texto pisca, 
+"html-has-lang", que avalia se o HTML possui o atributo
+"lang", "meta-refresh", que avalia se a página possui um meta refresh, e
+"accesskeys", que avalia se a página possui o atributo "accesskey"; Quais 
+diretrizes serão avaliadas, como: WCAG 2.1/2.2, ACT e Best Practices; e qual
+Tag HTML será avaliada, que para o contexto da UFJF, é o elemento com ID "conteudo-main",
+que é o elemento que contém o conteúdo de responsabilidade do conteudista.
+
+Entendendo o funcionamento da API, e sua importancia para o
+plugin, podemos seguir para a implementação do plugin em si. O plugin
+é desenvolvido em PHP~\autocite{php}, uma linguagem de programação amplamente utilizada
+para o desenvolvimento web, e é a linguagem utilizada pelo WordPress. 
+
+O WordPress disponibiliza a possibilidade de podermos adicionar elementos novos na interface
+do seu gerenciador de conteúdo, através de Hooks~\autocite{hooks}, que são pontos
+de extensão que permitem a modificação do comportamento padrão do WordPress. Em seu
+gerenciador de conteúdo, o WordPress possui uma área de administração das páginas, onde
+os conteudistas podem visualizar todos os posts e páginas do site, e editar o conteúdo
+de cada um deles.
+
+Tendo isso em mente, o plugin é desenvolvido para adicionar um novo botão na
+interface de administração das páginas, que ao ser clicado, aciona a API REST,
+passando como parâmetro a URL da página que será avaliada. O plugin então
+aguarda a resposta da API, que retorna o relatório de acessibilidade. O plugin
+então exibe o relatório na interface do WordPress, organizando os dados
+por categoria e criticalidade. Em sua interface disponibilizamos informações 
+como o número de erros e avisos encontrados,
+o titulo da regra de acessibilidade, a descrição do erro, uma sugestão de correção,
+e um link que abre a página em uma nova aba, com o elemento que apresenta o erro de 
+forma destacada.
+
+Dessa forma, o plugin permite que os conteudistas da UFJF possam avaliar a
+acessibilidade de suas páginas de forma simples e rápida, sem a necessidade
+de conhecimentos técnicos em relação à elementos HTML, CSS e JavaScript.
+Além disso, o plugin permite que os conteudistas possam visualizar o que 
+deverá ser corrigido, e como fazer isso.
+
+\subsubsection{Avaliação da Ferramenta}
+A terceira etapa consiste na avaliação da ferramenta, que será realizada
+através de testes de usabilidade, acessibilidade, desempenho e escalabilidade
+do sistema. Para isso, serão realizados testes com outras ferramentas de
+acessibilidade, como o AccessMonitor~\autocite{AM}, para avaliarmos a
+confiabilidade dos relatórios gerados pelo plugin. Durante todo o processo
+de desenvolvimento, foram realizados testes de desempenho com o Insomnia~\autocite{insomnia},
+uma ferramenta de teste de APIs, para avaliarmos o tempo de resposta da API,
+e obtivermos um tempo médio de resposta de 47ms, o que é um tempo considerado
+bom para uma API REST. Esse tempo de resposta foi obtido em um ambiente
+de desenvolvimento, e portanto, não reflete o tempo de resposta em um
+ambiente de produção, onde o tempo de resposta pode variar dependendo da
+carga do servidor e da quantidade de requisições simultâneas.
+
+Além disso, serão realizados testes de usabilidade com os conteudistas da 
+UFJF, para avaliarmos a facilidade de uso do plugin e a clareza dos relatórios 
+gerados, esses testes serão cruciais para entendermos quais ajustes deverão 
+ser feitos na interface do plugin, e como melhorar a experiência do usuário. 
+Por fim, se utilizando de demandas internas da UFJF, foram realizados testes 
+de escalabilidade, para avaliarmos a possibilidade de utilizarmos a API 
+em outros sites da UFJF, que não são gerenciados pelo WordPress, e a 
+possibilidade de utilizarmos a API em outros sistemas, como a nova versão do 
+SIGAx~\autocite{SIGAx}, que é o sistema de gestão acadêmica da UFJF\@. Com
+o testes de escalabilidade, obtivemos resultados positivos, o que nos
+permitiu criar um novo endpoint na API, que permite a avaliação de acessibilidade
+de qualquer página web, requisitando apenas o DOM e CSS da página, o que foi recebido
+com entusiasmo pela equipe de TI da UFJF\@. Esse novo endpoint permite que
+a API possa ser utilizada em outros sistemas ainda em ambientes de desenvolvimento,
+e que não estão disponíveis para o público.
+
+\section{Conclusão}
+A proposta deste artigo é apresentar uma solução técnica inovadora para o
+contexto da UFJF, baseada em um plugin WordPress de auditoria de acessibilidade
+que integra tecnologias modernas de automação, análise técnica e
+processamento de dados. O sistema opera como um serviço independente, com
+suporte a regras WCAG 2.1/2.2 e eMAG, permitindo avaliações em tempo real
+e personalização de regras de acessibilidade.
+
+A ferramenta não apenas otimiza processos técnicos, mas democratiza
+a fiscalização de acessibilidade, empoderando conteudistas não especialistas
+com dados claros e de fácil identificação. Este trabalho visa, portanto, contribuir
+para o debate sobre automação e inclusão digital, sugerindo um modelo que buscam alinhar-se às exigências legais e éticas da
+acessibilidade web, dentro do escopo do eMag, WCAG 2.1/2.2 e o contexto de cada
+organização.
+
+\section{Agradecimentos}
+Agradeço ao Centro de Gestão do Conhecimento Organizacional (CGCO) da
+Universidade Federal de Juiz de Fora (UFJF) pela oportunidade de
+desenvolver este trabalho e pela confiança depositada em mim. Agradeço
+também ao meu orientador, Gildo de Almeida Leonel, pela orientação e 
+apoio durante todo o processo de desenvolvimento do plugin de
+acessibilidade. Agradeço também a toda a equipe do CGCO, que sempre
+esteve disposta a ajudar e a contribuir com o desenvolvimento do
+plugin.
 
 \nocite{*}
 \printbibliography[title={Referências}]
