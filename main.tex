@@ -1,50 +1,236 @@
-\documentclass[12pt]{article}
+
+\documentclass[
+	% -- opções da classe memoir --
+	article,			% indica que é um artigo acadêmico
+	12pt,				% tamanho da fonte
+	oneside,			% para impressão apenas no recto. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	sumario=tradicional
+	]{abntex2}
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
-\usepackage[utf8]{inputenc}
-\usepackage{csquotes}
-\usepackage{hyphenat}
-\usepackage[brazil]{babel}
-\usepackage{graphicx}
-\usepackage[
-    backend=biber,
-    style=abnt,
-    language=brazil,
-    ]{biblatex}
-
-\addbibresource{references.bib}
+% ---
+		
+% ---
+% Pacotes de citações
+% ---
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+% ---
 
 
-\title{Plugin de acessibilidade para sites institucionais da UFJF}
-\author{João Victor Pereira dos Anjos}
-\date{Jan 2025}
+% --- Informações de dados para CAPA e FOLHA DE ROSTO ---
+\titulo{Plugin de acessibilidade para sites institucionais da UFJF}
+\tituloestrangeiro{Accessibility plugin for institutional websites of UFJF}
+
+\autor{\texorpdfstring{
+    João Victor Pereira dos Anjos
+    \thanks{Graduando em Sistemas de Informação pela Universidade Federal de Juiz de Fora.}
+    \and
+    Gildo de Almeida Leonel
+    }{}
+}
+
+\local{Brasil}
+\data{2025}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={Plugin de acessibilidade para sites institucionais da UFJF},
+	    pdfcreator={\LaTeX},
+		pdfkeywords={Acessibilidade web}{WordPress}{WCAG}{eMAG}{Automação}{UFJF}{Inclusão digital}{Plugin},
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=black,          	% color of internal links
+    	citecolor=black,        		% color of links to bibliography
+    	filecolor=black,      		% color of file links
+		urlcolor=black,
+		bookmarksdepth=4
+}
+
+\makeatother
+% --- 
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ---
+% Altera as margens padrões
+% ---
+\setlrmarginsandblock{3cm}{3cm}{*}
+\setulmarginsandblock{3cm}{3cm}{*}
+\checkandfixthelayout
+% ---
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Espaçamento simples
+\SingleSpacing
 
 
+% ----
+% Início do documento
+% ----
 \begin{document}
 
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+
+%---
+%
+% Se desejar escrever o artigo em duas colunas, descomente a linha abaixo
+% e a linha com o texto ``FIM DE ARTIGO EM DUAS COLUNAS''.
+% \twocolumn[    		% INICIO DE ARTIGO EM DUAS COLUNAS
+%
+%---
+
+% página de titulo principal (obrigatório)
 \maketitle
 
-\tableofcontents
 
-\section{Resumo}
+% titulo em outro idioma (opcional)
 
-This is the first section.
 
-Lorem  ipsum  dolor  sit  amet,  consectetuer  adipiscing
-elit.   Etiam  lobortisfacilisis sem.  Nullam nec mi et
-neque pharetra sollicitudin.  Praesent imperdietmi nec ante.
-Donec ullamcorper, felis non sodales..
 
+% resumo em português
+\begin{resumoumacoluna}
+    A garantia de acessibilidade digital em sites institucionais é um desafio
+    crescente, especialmente em instituições públicas como a Universidade Federal
+    de Juiz de Fora (UFJF). Este artigo apresenta a solução
+    técnica encontrada para esse desafio, no contexto da UFJF, que é a
+    implementação um plugin WordPress para auditoria automatizada de acessibilidade,
+    integrado a uma API REST externa que utiliza Puppeteer e axe-core para análise
+    técnica em tempo real. O sistema permite avaliações personalizadas, focando em
+    elementos editáveis por conteudistas, e gera relatórios claros com sugestões de
+    correção. A metodologia abrange três etapas: análise de requisitos,
+    desenvolvimento do plugin e avaliação da ferramenta. Resultados preliminares
+    indicam tempos médios de resposta de 47 ms na API, relatórios traduzidos para o
+    português brasileiro e adaptação às necessidades específicas da UFJF, como a
+    exclusão de regras irrelevantes ao contexto dos usuários. A solução demonstra
+    potencial para democratizar a fiscalização de acessibilidade, reduzindo a
+    dependência de auditorias manuais e otimizando processos técnicos, ao mesmo tempo
+    que empodera conteudistas não especialistas com dados claros e de fácil
+    identificação. A proposta visa contribuir para o debate sobre automação e
+    inclusão digital.
+
+    \vspace{\onelineskip}
+
+    \noindent
+    \textbf{Palavras-chave}: Acessibilidade web. WordPress. WCAG. eMAG. Automação. UFJF. Inclusão digital. Plugin.
+    \vspace{\onelineskip}
+\end{resumoumacoluna}
+
+
+% resumo em inglês
+\renewcommand{\resumoname}{Abstract}
+\begin{resumoumacoluna}
+    \begin{otherlanguage*}{english}
+        The guarantee of digital accessibility in institutional websites is a
+        growing challenge, especially in public institutions such as the Federal
+        University of Juiz de Fora (UFJF). This article presents the technical
+        solution found for this challenge, in the context of UFJF, which is the
+        implementation of a WordPress plugin for automated accessibility auditing,
+        integrated with an external REST API that uses Puppeteer and axe-core for
+        real-time technical analysis. The system allows personalized evaluations,
+        focusing on elements editable by content creators, and generates clear
+        reports with correction suggestions. The methodology includes three stages:
+        requirements analysis, plugin development, and tool evaluation. Preliminary
+        results indicate average response times of 47 ms in the API, reports
+        translated into Brazilian Portuguese, and adaptation to the specific
+        needs of UFJF, such as the exclusion of rules irrelevant to the context of
+        users. The solution demonstrates potential to democratize accessibility
+        oversight, reducing reliance on manual audits and optimizing technical
+        processes, while empowering non-specialist content creators with clear and
+        easily identifiable data. The proposal aims to contribute to the debate on
+        automation and digital inclusion.
+
+        \vspace{\onelineskip}
+
+        \noindent
+        \textbf{Keywords}: Web accessibility. WordPress. WCAG. eMAG. Automation. UFJF. Digital inclusion. Plugin.
+    \end{otherlanguage*}
+\end{resumoumacoluna}
+
+% ]  				% FIM DE ARTIGO EM DUAS COLUNAS
+% ---
+
+\begin{center}\smaller
+    \textbf{Data de submissão e aprovação}: elemento obrigatório. Indicar dia, mês e ano
+
+    \textbf{Identificação e disponibilidade}: elemento opcional. Pode ser indicado
+    o endereço eletrônico, DOI, suportes e outras informações relativas ao acesso.
+\end{center}
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
 \section{Introdução}
 
 A palavra acessibilidade, sua origem etimológica é derivada do latim \textit{accessiblitas}
 e significa ``condição para utilização, com segurança e autonomia,
 total ou assistida, dos espaços, mobiliários e equipamentos urbanos, das
 edificações, dos serviços de transporte e dos dispositivos, sistemas e meios de
-comunicação e informação, por pessoa com deficiência ou mobilidade reduzida''\cite{Acessibilidade}.
+comunicação e informação, por pessoa com deficiência ou mobilidade reduzida''\cite{CD}.
 
 No Brasil, a acessibilidade é um direito garantido pela Constituição
-Federal de 1988, pela Lei Brasileira de Inclusão (LBI) de 2015 \Cite{LBI}
+Federal de 1988, pela Lei Brasileira de Inclusão (LBI) de 2015 \cite{LBI}
 e por normas técnicas específicas, como a NBR 9050/2015 da Associação
 Brasileira de Normas Técnicas~\cite{ABNT}. Essas legislações estabelecem
 parâmetros para a promoção da acessibilidade em espaços públicos e privados,
@@ -52,7 +238,7 @@ visando a inclusão de pessoas com deficiência física, visual, auditiva,
 intelectual e múltipla.
 
 No âmbito digital a acessibilidade web é um pilar fundamental para a
-inclusão, o WCAG 2.1/2.2 \autocite{wcag22} sendo um conjunto de diretrizes
+inclusão, o WCAG 2.1/2.2 \cite{wcag22} sendo um conjunto de diretrizes
 internacionais para a acessibilidade de conteúdo web, tem por objetivo,
 tornar os sites mais acessíveis para as pessoas com deficiência visual, auditiva,
 motora e cognitiva, garantindo a igualdade de acesso à informação e aos
@@ -72,7 +258,7 @@ A fim de divulgar as informações referentes aos seus setores e atividades a
 Universidade Federal de Juiz de Fora, UFJF, através do Centro de Gestão
 do Conhecimento Organizacional (CGCO), é responsável por controlar a
 disponibilização de sites, a padronização dos layouts e o suporte técnico. Para
-a sustentação desse serviço, é utilizado o CMS WordPress~\autocite{WP},
+a sustentação desse serviço, é utilizado o CMS WordPress~\cite{WP},
 uma plataforma de gerenciamento de conteúdo que permite a criação e
 manutenção de sites de forma simplificada e intuitiva.
 
@@ -104,9 +290,9 @@ em três etapas principais: análise de requisitos, onde são identificadas as
 necessidades da UFJF e feitos testes com ferramentas de acessibilidade já
 existentes; desenvolvimento do plugin, onde são definidas as tecnologias à serem
 utilizadas, a arquitetura do sistema, a implementação das funcionalidades e a
-integração com o WordPress Multi-Sites~\autocite{wp-ms}; e por fim, 
+integração com o WordPress Multi-Sites~\cite{wp-ms}; e por fim,
 a avaliação da ferramenta,
-onde são feitos testes de usabilidade, acessibilidade, desempenho e 
+onde são feitos testes de usabilidade, acessibilidade, desempenho e
 escalabilidade do sistema.
 
 Fragmentando a metodologia em etapas, é possível garantir um desenvolvimento
@@ -143,7 +329,7 @@ pelos conteudistas, o que torna a avaliação de acessibilidade desses elementos
 não necessária para o conteudista, sendo assim, o plugin deve permitir a
 personalização tanto das regas a serem avaliadas, quanto dos elementos.
 
-Uma API REST~\autocite{api}, é uma interface de programação de aplicações, que
+Uma API REST~\cite{api}, é uma interface de programação de aplicações, que
 permite a comunicação entre sistemas, e é amplamente utilizada para integração
 de sistemas e serviços. A utilização de uma API REST somente para a geração
 dos relatórios em tempo real, sem a necessidade de armazenamento, é uma
@@ -153,7 +339,7 @@ relatórios de acessibilidade em um banco de dados, é tarefa que consumiria
 muitos recursos e espaço em disco, tornando inviável tal abordagem.
 
 Em fase preliminar ao desenvolvimento do projeto, realizamos testes com o
-AccessMonitor~\autocite{AM},
+AccessMonitor~\cite{AM},
 uma ferramenta de auditoria de acessibilidade online, que permite a avaliação de
 sites em tempo real. Embora a solução ofereça uma interface intuitiva para
 avaliação pontual de páginas web, identificamos limitações significativas para o
@@ -164,7 +350,7 @@ serem avaliadas por um endereço IP\@. Adicionalmente, a necessidade de inserç�
 manual de URLs por avaliação tornava inviável a análise de grandes portfólios de
 sites\@.
 
-Testamos também a utilização do QualWeb~\autocite{qualweb}, que é a ferramenta
+Testamos também a utilização do QualWeb~\cite{qualweb}, que é a ferramenta
 de avaliação portrás do AccessMonitor, porém, esbarramos em limitações técnicas,
 semelhantesàs encontradas no AccessMonitor, e principalmente, na falta de suporte
 na tradução de relatórios para o português brasileiro, o que dificultaria a compreensão dos
@@ -175,18 +361,18 @@ personalizado, que atendesse às necessidades específicas da UFJF e que fosse
 compatível com a infraestrutura tecnológica existente. Para auxiliar no
 desenvolvimento da API REST que gera os relatórios de acessibilidade,
 buscamos por ferramentas e tecnologias que avaliasse a acessibilidade
-do conteúdo DOM~\autocite{DOM} de uma página web.
+do conteúdo DOM~\cite{DOM} de uma página web.
 
-Encontramos o IBM Equal Access Toolkit~\autocite{IBMa}, uma ferramenta de código
+Encontramos o IBM Equal Access Toolkit~\cite{IBMa}, uma ferramenta de código
 aberto desenvolvida pela IBM, que permite a avaliação de acessibilidade de páginas
 web em tempo real, com suporte as diretrizes de acessibilidade. A ferramenta oferece
-o accessibility-checker~\autocite{AC} um pacote Node~\autocite{Node} que permite a
+o accessibility-checker~\cite{AC} um pacote Node~\cite{Node} que permite a
 testes automatizados de acessibilidade. O pacote permite também a personalização de
 regras a serem avaliadas,
 porém, a dificuldade de integração com a nossa API, e a falta de suporte para o
 português, impediu de seguirmos com essa ferramenta.
 
-A ferramenta da qual decidimos utilizar foi o axe-core~\autocite{axecore}, a quarta
+A ferramenta da qual decidimos utilizar foi o axe-core~\cite{axecore}, a quarta
 ferramenta de avaliação de acessibilidade que testamos. O axe-core é uma biblioteca
 de código aberto, desenvolvida pela Deque Systems, que permite a avaliação de acessibilidade
 de páginas web. O ponto chave que nos fez optar por essa ferramenta, foi a facilidade
@@ -198,15 +384,15 @@ da UFJF\@.
 A segunda etapa consiste no desenvolvimento do plugin de acessibilidade, que
 integra tecnologias de automação, análise técnica e processamento de
 dados. Para isso, optamos por utilizar a linguagem de programação JavaScript, em
-em conjunto com o framework Express.js~\autocite{express}, que é um framework web
+em conjunto com o framework Express.js~\cite{express}, que é um framework web
 para Node.js, que permite a criação de aplicações web de forma rápida
 e eficiente.
 
 Para entendermos a integração com o WordPress Multi-Sites, prescisamos entender
 o conceito de Endpoints, Rotas e o que significa Multi-Sites no contexto do WordPress.
-Um endpoint~\autocite{endpoints} é uma URL específica que é usada para acessar
+Um endpoint~\cite{endpoints} é uma URL específica que é usada para acessar
 recursos em uma API, como por exemplo, uma lista de postagens ou páginas de um site. Uma
-rota~\autocite{routes} é um caminho específico que é usado para acessar um endpoint,
+rota~\cite{routes} é um caminho específico que é usado para acessar um endpoint,
 e é definida no arquivo de rotas da aplicação. O WordPress Multi-Sites é uma funcionalidade
 do WordPress que permite a criação de vários sites a partir de uma única instalação,
 e cada site possui um ID único e um domínio específico, além de possuir seu próprio
@@ -231,24 +417,24 @@ garantindo consistência e padronização nos resultados.
 
 A distinção entre as duas rotas reside em um detalhe fundamental: a rota
 de avaliação de um post específico possui um escopo mais restrito, focando
-apenas naquele post em particular, e principalmente, é por esssa rota que 
-o plugin é acionado, permitindo que o conteudista realize a avaliação de 
-acessibilidade de um post específico, e visualize o relatório na interface do 
+apenas naquele post em particular, e principalmente, é por esssa rota que
+o plugin é acionado, permitindo que o conteudista realize a avaliação de
+acessibilidade de um post específico, e visualize o relatório na interface do
 WordPress. Por outro lado, a rota de avaliação de todos os posts de um site
-opera de forma mais abrangente, percorrendo todas as páginas disponíveis 
-e gerando relatórios. Essa diferença de escopo é essencial para atender às 
+opera de forma mais abrangente, percorrendo todas as páginas disponíveis
+e gerando relatórios. Essa diferença de escopo é essencial para atender às
 demandas específicas dos conteudistas e dos desenvolvedores da UFJF.
 \bigbreak
 
 \tikzstyle{plugin} = [rectangle, rounded corners, minimum width=3cm,
-    minimum height=1cm,text centered, draw=black, fill=gray!30]
+minimum height=1cm,text centered, draw=black, fill=gray!30]
 \tikzstyle{api} = [rectangle, rounded corners, minimum width=3cm,
-    minimum height=1cm,text centered, draw=black, fill=gray!30]
+minimum height=1cm,text centered, draw=black, fill=gray!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
 \tikzstyle{puppeteer} = [rectangle, rounded corners, minimum width=3cm,
-    minimum height=1cm,text centered, draw=black, fill=gray!30]
+minimum height=1cm,text centered, draw=black, fill=gray!30]
 \tikzstyle{axe} = [rectangle, rounded corners, minimum width=3cm,
-    minimum height=1cm,text centered, draw=black, fill=gray!30]
+minimum height=1cm,text centered, draw=black, fill=gray!30]
 \begin{tikzpicture}[node distance=2cm]
     \node (plugin) [plugin,xshift=-2] {Plugin};
     \node (api) [api, below of=plugin] {API REST};
@@ -268,10 +454,10 @@ Fluxo de execução da api - Figura 1
 
 Seguindo como base o fluxo de execução da API apresentado na figura 1,
 a requisição do plugin é recebida pela API REST, que se utiliza
-do Puppeteer~\autocite{puppeteer}, uma biblioteca Node.js que fornece uma
-API de alto nível para controlar o Chrome~\autocite{chrome} através do protocolo
-DevTools~\autocite{devtools}. O Puppeteer é utilizado para abrir uma nova aba no navegador de forma
-headless~\autocite{headless}, ou seja, sem interface gráfica, e carregar a URL da página
+do Puppeteer~\cite{puppeteer}, uma biblioteca Node.js que fornece uma
+API de alto nível para controlar o Chrome~\cite{chrome} através do protocolo
+DevTools~\cite{devtools}. O Puppeteer é utilizado para abrir uma nova aba no navegador de forma
+headless~\cite{headless}, ou seja, sem interface gráfica, e carregar a URL da página
 especificada na requisição. Após o carregamento da página, a API
 executa a ferramenta axe-core, usando como parametro a página carregada
 pelo Puppeteer e a personalização definida pelo CGCO, e gera uma avaliação
@@ -280,23 +466,24 @@ processa o relatório removendo informações irrelevantes e organizando os dado
 para a integração com o plugin. O relatório final então é enviado de
 volta para o plugin, que exibe as informações na interface do WordPress.
 
-As principais personalizações implementadas no API serão: 
-tradução dos relatórios para o português; Quais regras de acessibilidade 
-não serão avaliadas por serem regras das quais não estão no contexto dos conteúdistas acessarem, como: "blink", que avalia se o texto pisca, 
+As principais personalizações implementadas no API serão:
+tradução dos relatórios para o português; Quais regras de acessibilidade
+não serão avaliadas por serem regras das quais não estão no contexto dos conteúdistas acessarem, como: "blink", que avalia se o texto pisca,
 "html-has-lang", que avalia se o HTML possui o atributo
 "lang", "meta-refresh", que avalia se a página possui um meta refresh, e
-"accesskeys", que avalia se a página possui o atributo "accesskey"; Quais 
-diretrizes serão avaliadas, como: WCAG 2.1/2.2, ACT~\autocite{ACT} e Best Practices~\autocite{BP}; e qual
+"accesskeys", que avalia se a página possui o atributo "accesskey"; Quais
+diretrizes serão avaliadas, como: WCAG 2.1/2.2, ACT~\cite{ACT} e Best
+Practices~\cite{BP}; e qual
 Tag HTML será avaliada, que para o contexto da UFJF, é o elemento com ID "conteudo-main",
 que é o elemento que contém o conteúdo de responsabilidade do conteudista.
 
 Entendendo o funcionamento da API, e sua importancia para o
 plugin, podemos seguir para a implementação do plugin em si. O plugin WordPress
-é desenvolvido em PHP~\autocite{php}, uma linguagem de programação amplamente utilizada
-para o desenvolvimento web, e é a linguagem utilizada pelo WordPress. 
+é desenvolvido em PHP~\cite{php}, uma linguagem de programação amplamente utilizada
+para o desenvolvimento web, e é a linguagem utilizada pelo WordPress.
 
 O WordPress disponibiliza a possibilidade de podermos adicionar elementos novos na interface
-do seu gerenciador de conteúdo, através de Hooks~\autocite{hooks}, que são pontos
+do seu gerenciador de conteúdo, através de Hooks~\cite{hooks}, que são pontos
 de extensão que permitem a modificação do comportamento padrão do WordPress. Em seu
 gerenciador de conteúdo, o WordPress possui uma área de administração das páginas, onde
 os conteudistas podem visualizar todos os posts e páginas do site, e editar o conteúdo
@@ -307,16 +494,16 @@ interface de administração das páginas, que ao ser clicado, aciona a API REST
 passando como parâmetro a URL da página que será avaliada. O plugin então
 aguarda a resposta da API, que retorna o relatório de acessibilidade. O plugin
 então exibe o relatório na interface do WordPress, organizando os dados
-por categoria e criticalidade. Em sua interface disponibilizamos informações 
+por categoria e criticalidade. Em sua interface disponibilizamos informações
 como o número de erros e avisos encontrados,
 o titulo da regra de acessibilidade, a descrição do erro, uma sugestão de correção,
-e um link que abre a página em uma nova aba, com o elemento que apresenta o erro de 
+e um link que abre a página em uma nova aba, com o elemento que apresenta o erro de
 forma destacada.
 
 Dessa forma, o plugin permite que os conteudistas da UFJF possam avaliar a
 acessibilidade de suas páginas de forma simples e rápida, sem a necessidade
 de conhecimentos técnicos em relação à elementos HTML, CSS e JavaScript.
-Além disso, o plugin permite que os conteudistas possam visualizar o que 
+Além disso, o plugin permite que os conteudistas possam visualizar o que
 deverá ser corrigido, e como fazer isso.
 
 \subsection{Avaliação da Ferramenta}
@@ -324,10 +511,10 @@ A terceira etapa consiste na avaliação da ferramenta, que será realizada
 através de testes de usabilidade, acessibilidade, desempenho e escalabilidade
 do sistema. Para isso, serão realizados testes com outras ferramentas de
 acessibilidade, como o AccessMonitor, para avaliarmos a
-confiabilidade dos relatórios gerados pelo plugin. 
+confiabilidade dos relatórios gerados pelo plugin.
 
 Durante todo o processo
-de desenvolvimento, foram realizados testes de desempenho com o Insomnia~\autocite{insomnia},
+de desenvolvimento, foram realizados testes de desempenho com o Insomnia~\cite{insomnia},
 uma ferramenta de teste de APIs, para avaliarmos o tempo de resposta da API,
 e obtivermos um tempo médio de resposta de 47ms, o que é um tempo considerado
 bom para uma API REST. Esse tempo de resposta foi obtido em um ambiente
@@ -335,17 +522,17 @@ de desenvolvimento, e portanto, não reflete o tempo de resposta em um
 ambiente de produção, onde o tempo de resposta pode variar dependendo da
 carga do servidor e da quantidade de requisições simultâneas.
 
-Além disso, serão realizados testes de usabilidade com os conteudistas da 
-UFJF, para avaliarmos a facilidade de uso do plugin e a clareza dos relatórios 
-gerados, esses testes serão cruciais para entendermos quais ajustes deverão 
+Além disso, serão realizados testes de usabilidade com os conteudistas da
+UFJF, para avaliarmos a facilidade de uso do plugin e a clareza dos relatórios
+gerados, esses testes serão cruciais para entendermos quais ajustes deverão
 ser feitos na interface do plugin, e como melhorar a experiência do usuário.
 
 
-Por fim, se utilizando de demandas internas da UFJF, foram realizados testes 
-de escalabilidade, para avaliarmos a possibilidade de utilizarmos a API 
-em outros sites da UFJF, que não são gerenciados pelo WordPress, e a 
-possibilidade de utilizarmos a API em outros sistemas, como a nova versão do 
-SIGAx~\autocite{SIGAx}, que é o sistema de gestão acadêmica da UFJF\@.
+Por fim, se utilizando de demandas internas da UFJF, foram realizados testes
+de escalabilidade, para avaliarmos a possibilidade de utilizarmos a API
+em outros sites da UFJF, que não são gerenciados pelo WordPress, e a
+possibilidade de utilizarmos a API em outros sistemas, como a nova versão do
+SIGAx~\cite{SIGAx}, que é o sistema de gestão acadêmica da UFJF\@.
 
 
 Com os testes de escalabilidade, obtivemos resultados positivos, o que nos
@@ -380,7 +567,83 @@ organização.
 % esteve disposta a ajudar e a contribuir com o desenvolvimento do
 % plugin.
 
-\nocite{*}
-\printbibliography[title={Referências}]
+% ---
+
+% ---
+% Conclusão
+% ---
+% \section{Considerações finais}
+
+% \lipsum[1]
+
+% \begin{citacao}
+%     \lipsum[2]
+% \end{citacao}
+
+% \lipsum[3]
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+% \postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{references}
+
+% % ----------------------------------------------------------
+% % Glossário
+% % ----------------------------------------------------------
+% %
+% % Há diversas soluções prontas para glossário em LaTeX. 
+% % Consulte o manual do abnTeX2 para obter sugestões.
+% %
+% %\glossary
+
+% % ----------------------------------------------------------
+% % Apêndices
+% % ----------------------------------------------------------
+
+% % ---
+% % Inicia os apêndices
+% % ---
+% \begin{apendicesenv}
+
+%     % ----------------------------------------------------------
+%     \chapter{Nullam elementum urna vel imperdiet sodales elit ipsum pharetra ligula
+%       ac pretium ante justo a nulla curabitur tristique arcu eu metus}
+%     % ----------------------------------------------------------
+%     \lipsum[55-56]
+
+% \end{apendicesenv}
+% % ---
+
+% % ----------------------------------------------------------
+% % Anexos
+% % ----------------------------------------------------------
+% \cftinserthook{toc}{AAA}
+% % ---
+% % Inicia os anexos
+% % ---
+% %\anexos
+% \begin{anexosenv}
+
+%     % ---
+%     \chapter{Cras non urna sed feugiat cum sociis natoque penatibus et magnis dis
+%       parturient montes nascetur ridiculus mus}
+%     % ---
+
+%     \lipsum[31]
+
+% \end{anexosenv}
+
+% ----------------------------------------------------------
+% Agradecimentos
+% ----------------------------------------------------------
+
+% \section*{Agradecimentos}
+% Texto sucinto aprovado pelo periódico em que será publicado. Último
+% elemento pós-textual.
 
 \end{document}
