@@ -113,10 +113,14 @@
 % Controle do espaçamento entre um parágrafo e outro:
 \setlength{\parskip}{0.2cm}  % tente também \onelineskip
 
-% Espaçamento simples
-\SingleSpacing
+% Espaçamento 1,5
+\renewcommand{\baselinestretch}{1.5} % espaçamento entre linhas
 
 \chapterstyle{article}
+
+\usepackage{setspace}
+\setlength{\parindent}{1.25cm} % Recuo de parágrafo
+\setlength{\parskip}{0pt} % Remove espaçamento entre parágrafos
 
 
 % ----
@@ -145,6 +149,7 @@
 
 % página de titulo principal (obrigatório)
 \maketitle
+\thispagestyle{empty}
 
 
 % titulo em outro idioma (opcional)
@@ -433,7 +438,7 @@ minimum height=1cm,text centered, draw=black, fill=gray!30]
 minimum height=1cm,text centered, draw=black, fill=gray!30]
 \tikzstyle{axe} = [rectangle, rounded corners, minimum width=3cm,
 minimum height=1cm,text centered, draw=black, fill=gray!30]
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \caption{Fluxo de execução da API}
     \label{fig:fluxo}
@@ -486,7 +491,7 @@ de extensão que permitem a modificação do comportamento padrão do WordPress.
 gerenciador de conteúdo, o WordPress possui uma área de administração, onde
 os conteudistas podem visualizar todos os posts e as páginas do site, e editar o conteúdo
 de cada um deles, representado na figura~\ref{fig:wp-admin}.
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \caption{Área de administração do WordPress}
     \label{fig:wp-admin}
@@ -500,7 +505,7 @@ que retorna o relatório de acessibilidade. O plugin
 então exibe o relatório na interface do WordPress, organizando os dados
 por categoria e criticalidade, representado na figura~\ref{fig:relatorio}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \caption{Relatório de acessibilidade do plugin}
     \label{fig:relatorio}
