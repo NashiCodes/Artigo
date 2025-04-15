@@ -37,9 +37,13 @@
 % Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
 % ---
 \usepackage{lipsum}				% para geração de dummy text
+\usepackage{titling}
 \graphicspath{{./imagens}}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
+
+\usepackage[scaled]{helvet}
+\renewcommand*\familydefault{\sfdefault}
 % ---
 		
 % ---
@@ -80,6 +84,7 @@
 		urlcolor=black,
 		bookmarksdepth=4
 }
+\renewcommand{\author}{\raggedleft\@author}
 
 \makeatother
 % --- 
@@ -110,6 +115,8 @@
 
 % Espaçamento simples
 \SingleSpacing
+
+\chapterstyle{article}
 
 
 % ----
@@ -203,16 +210,6 @@
     \end{otherlanguage*}
 \end{resumoumacoluna}
 
-% ]  				% FIM DE ARTIGO EM DUAS COLUNAS
-% ---
-
-\begin{center}\smaller
-    \textbf{Data de submissão e aprovação}: elemento obrigatório. Indicar dia, mês e ano
-
-    \textbf{Identificação e disponibilidade}: elemento opcional. Pode ser indicado
-    o endereço eletrônico, DOI, suportes e outras informações relativas ao acesso.
-\end{center}
-
 % ----------------------------------------------------------
 % ELEMENTOS TEXTUAIS
 % ----------------------------------------------------------
@@ -221,7 +218,7 @@
 % ----------------------------------------------------------
 % Introdução
 % ----------------------------------------------------------
-\section{Introdução}
+\chapter*{Introdução}
 
 A palavra acessibilidade é derivada do latim \textit{accessiblitas}
 e significa ``condição para utilização, com segurança e autonomia,
@@ -283,7 +280,7 @@ análise técnica e processamento de dados. O sistema opera como um serviço
 independente, com suporte a regras WCAG 2.1/2.2 e eMAG, permitindo
 avaliações em tempo real e personalização de regras de acessibilidade.
 
-\section{Metodologia}\label{sec:metodologia}
+\chapter*{Metodologia}\label{sec:metodologia}
 A metodologia proposta neste trabalho
 para a implementação do sistema de auditoria de acessibilidade é dividida
 em três etapas principais: análise de requisitos, onde são identificadas as
@@ -303,7 +300,7 @@ produto final que atenda às expectativas e às necessidades da UFJF e dos
 conteudistas. A seguir, será apresentada cada uma das etapas da metodologia
 proposta, detalhando as atividades realizadas e os resultados obtidos.
 
-\subsection{Análise de Requisitos}
+\chapter*{Análise de Requisitos}
 A primeira etapa consiste na análise dos requisitos do sistema, com base nas
 necessidades da UFJF e nas diretrizes de acessibilidade. Para isso, a partir
 de reuniões entre a equipe de TI e os conteudistas, chegou-se a um conjunto de
@@ -381,7 +378,7 @@ de integração com a API REST, a possibilidade de personalização de regras a 
 avaliadas e o suporte para o português, o que facilitaria a compreensão dos conteudistas
 da UFJF\@.
 
-\subsection{Desenvolvimento do Plugin}
+\chapter*{Desenvolvimento do Plugin}
 A segunda etapa consiste no desenvolvimento do plugin de acessibilidade, que
 integra tecnologias de automação, análise técnica e processamento de
 dados. Para isso, optou-se por utilizar a linguagem de programação JavaScript, em
@@ -538,7 +535,7 @@ deverá ser corrigido e como fazer isso, representado na figura~\ref{fig:relator
 \end{figure}
 
 
-\subsection{Avaliação da Ferramenta}
+\chapter*{Avaliação da Ferramenta}
 A terceira etapa consiste na avaliação da ferramenta, realizada 
 através de testes de usabilidade, acessibilidade, desempenho e escalabilidade
 do sistema. Para isso, foram realizados testes com outras ferramentas de
@@ -571,7 +568,7 @@ com entusiasmo pela equipe de TI da UFJF\@. Esse novo endpoint permite que
 a API possa ser utilizada em outros sistemas ainda em ambientes de desenvolvimento 
 e que não estão disponíveis para o público.
 
-\section{Conclusão}
+\chapter*{Conclusão}
 A proposta deste artigo é apresentar uma solução técnica inovadora para o
 contexto da UFJF, baseada em um plugin WordPress de auditoria de acessibilidade, 
 que integra tecnologias modernas de automação, análise técnica e
@@ -586,7 +583,7 @@ para o debate sobre automação e inclusão digital, sugerindo um modelo que bus
 acessibilidade web, dentro do escopo do eMag, WCAG 2.1/2.2 e o contexto de cada
 organização.
 
-% \section{Agradecimentos}
+% \chapter*{Agradecimentos}
 % Agradeço ao Centro de Gestão do Conhecimento Organizacional (CGCO) da
 % Universidade Federal de Juiz de Fora (UFJF) pela oportunidade de
 % desenvolver este trabalho e pela confiança depositada em mim. Agradeço
@@ -601,7 +598,7 @@ organização.
 % ---
 % Conclusão
 % ---
-% \section{Considerações finais}
+% \chapter*{Considerações finais}
 
 % \lipsum[1]
 
@@ -640,7 +637,7 @@ organização.
 % \begin{apendicesenv}
 
 %     % ----------------------------------------------------------
-%     \chapter{Nullam elementum urna vel imperdiet sodales elit ipsum pharetra ligula
+%     \chapter*{Nullam elementum urna vel imperdiet sodales elit ipsum pharetra ligula
 %       ac pretium ante justo a nulla curabitur tristique arcu eu metus}
 %     % ----------------------------------------------------------
 %     \lipsum[55-56]
@@ -659,7 +656,7 @@ organização.
 % \begin{anexosenv}
 
 %     % ---
-%     \chapter{Cras non urna sed feugiat cum sociis natoque penatibus et magnis dis
+%     \chapter*{Cras non urna sed feugiat cum sociis natoque penatibus et magnis dis
 %       parturient montes nascetur ridiculus mus}
 %     % ---
 
@@ -671,7 +668,7 @@ organização.
 % Agradecimentos
 % ----------------------------------------------------------
 
-% \section*{Agradecimentos}
+% \chapter*{Agradecimentos}
 % Texto sucinto aprovado pelo periódico em que será publicado. Último
 % elemento pós-textual.
 
