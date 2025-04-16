@@ -197,18 +197,18 @@ inclusão digital.
 
 \section*{Abstract}
 Ensuring digital accessibility on institutional websites is a growing challenge, especially
-in public institutions such as the Federal University of Juiz de Fora (UFJF). This article 
-presents the technical solution found for this challenge, in the context of UFJF, which is the 
-implementation of a WordPress plugin for automated accessibility auditing, integrated with 
-an external REST API that uses Puppeteer and axe-core for real-time technical analysis. The 
-system allows customized evaluations, focusing on elements that can be edited by content 
-designers, and generates clear reports with suggestions for corrections. The methodology covers 
-three stages: requirements analysis, plugin development and tool evaluation. Preliminary results 
-indicate average response times of 47 ms in the API, reports translated into Brazilian Portuguese 
-and adaptation to the specific needs of UFJF, such as the exclusion of rules irrelevant to the 
-users' context. The solution demonstrates the potential to democratize accessibility inspection, 
-reducing dependence on manual audits and optimizing technical processes, while empowering 
-non-expert content users with clear and easily identifiable data. The proposal aims to contribute 
+in public institutions such as the Federal University of Juiz de Fora (UFJF). This article
+presents the technical solution found for this challenge, in the context of UFJF, which is the
+implementation of a WordPress plugin for automated accessibility auditing, integrated with
+an external REST API that uses Puppeteer and axe-core for real-time technical analysis. The
+system allows customized evaluations, focusing on elements that can be edited by content
+designers, and generates clear reports with suggestions for corrections. The methodology covers
+three stages: requirements analysis, plugin development and tool evaluation. Preliminary results
+indicate average response times of 47 ms in the API, reports translated into Brazilian Portuguese
+and adaptation to the specific needs of UFJF, such as the exclusion of rules irrelevant to the
+users' context. The solution demonstrates the potential to democratize accessibility inspection,
+reducing dependence on manual audits and optimizing technical processes, while empowering
+non-expert content users with clear and easily identifiable data. The proposal aims to contribute
 to the debate on automation and digital inclusion.
 \bigbreak
 \noindent
@@ -240,6 +240,18 @@ eletrônico que estabelece diretrizes para a promoção da acessibilidade em
 sites governamentais, com o objetivo de garantir a inclusão digital e o acesso
 à informação para todos os cidadãos Brasileiros.
 
+Diversos estudos evidenciam a importância de monitorar e aprimorar continuamente
+as estratégias de acessibilidade em ambientes digitais. Por exemplo, a dissertação de Renato
+Santos Lourenço \cite{PhdRenato} demonstrou, através da análise dos portais institucionais
+da UFPB, que mesmo com a padronização oferecida por sistemas como o Plone~\cite{plone},
+persistem desafios significativos para garantir um acesso verdadeiramente inclusivo.
+De maneira complementar, o estudo de Gurgel, Medeiros e Moura \cite{Gurgel}
+avaliou a acessibilidade do Portal IFRN utilizando os modelos e-MAG e
+WCAG Samurai, evidenciando a necessidade de soluções práticas, escaláveis e adaptáveis à
+realidade dos usuários. Esses trabalhos reforçam a relevância de implementar ferramentas automatizadas de auditoria de acessibilidade, como o plugin proposto neste artigo, que visa
+otimizar o monitoramento, facilitar a identificação de falhas e subsidiar a correção dos erros de
+maneira clara e acessível para os conteudistas.
+
 A Universidade Federal de Juiz de Fora (UFJF), como uma instituição pública,
 gerencia uma grande quantidade de sites e portais, que são regularmente
 atualizados por diversas pessoas, como professores, pesquisadores, bolsistas e
@@ -255,26 +267,29 @@ a sustentação desse serviço, é utilizado o CMS WordPress~\cite{WP},
 uma plataforma de gerenciamento de conteúdo que permite a criação e a
 manutenção de sites de forma simplificada e intuitiva.
 
-Nesse cenário, há uma complexidade ao realizar auditorias manuais, que
-consomem tempo e recursos, e principalmente, a falta de ferramentas
-centralizadas dentro da UFJF para aplicar o Modelo de Acessibilidade em
-Governo Eletrônico~\cite{emag}, conhecido como eMag, e as Diretrizes
-de Acessibilidade para Conteúdo Web~\cite{wcag22}, conhecidas como
-WCAG, visto que esse documentos estabelecem parâmetros técnicos para essa inclusão.
+Nesse cenário, há uma complexidade ao realizar auditorias manuais, que consomem
+tempo e recursos, e principalmente, a falta de ferramentas centralizadas dentro da UFJF para
+aplicar o Modelo de Acessibilidade em Governo Eletrônico~\cite{emag},
+conhecido como eMag, e as Diretrizes de Acessibilidade para Conteúdo Web~\cite{wcag22},
+conhecidas como WCAG, visto que esse documentos estabelecem parâmetros técnicos para
+essa inclusão.
 
-Em uma análise preliminar, avaliando a presença de elementos de acessibilidade nos
-sites da UFJF, foi identificado que boa parte apresentavam falhas, como imagens sem texto
-alternativo e baixo contraste de cores, limitando o acesso de usuários com deficiência
-visual. Além disso, a falta de padronização e de um processo de auditoria contínuo
-dificultam a identificação e a correção dessas falhas, comprometendo a qualidade e a
-usabilidade dos sites.
+Em uma análise preliminar dos sites da UFJF, foram identificadas diversas falhas de
+acessibilidade, como a ausência de texto alternativo para imagens e o baixo contraste de cores,
+limitando o acesso de usuários com deficiência visual. Essa constatação evidencia, além da
+falta de padronização e de um processo contínuo de auditoria, os desafios que comprometem a
+qualidade e a usabilidade dos ambientes digitais. Estudos anteriores reforçam essa perspectiva;
+por exemplo, a pesquisa realizada por Carvalho et al. \cite{SBSI}
+demonstrou que os sites de governos estaduais frequentemente apresentam problemas similares,
+decorrentes de uma estruturação inadequada do código HTML e da carência de alternativas
+acessíveis, o que torna a identificação e correção dos erros ainda mais complexa.
 
-Diante desse desafio, este artigo propõe uma solução técnica inovadora
-para o contexto da UFJF, baseada em um plugin WordPress de auditoria
-de acessibilidade, que integra tecnologias modernas de automação,
-análise técnica e processamento de dados. O sistema opera como um serviço
-independente, com suporte a regras WCAG 2.1/2.2 e eMAG, permitindo
-avaliações em tempo real e personalização de regras de acessibilidade.
+Diante desse desafio, este artigo propõe uma solução técnica inovadora para o
+contexto da UFJF, baseada em um plugin WordPress de auditoria de acessibilidade que integra
+tecnologias de automação, análise técnica e processamento de dados. Operando como um
+serviço independente, o sistema conta com suporte às regras WCAG 2.1/2.2 e ao modelo
+eMAG, permitindo avaliações em tempo real e a personalização dos critérios de análise, de
+forma a gerar relatórios claros e orientados para a correção das falhas.
 
 \section*{Metodologia}\label{sec:metodologia}
 A metodologia proposta neste trabalho
@@ -430,21 +445,21 @@ minimum height=1cm,text centered, draw=black, fill=gray!30]
 \tikzstyle{axe} = [rectangle, rounded corners, minimum width=3cm,
 minimum height=1cm,text centered, draw=black, fill=gray!30]
 \begin{figure}[ht]
-    \centering
-    \caption{Fluxo de execução da API}
-    \label{fig:fluxo}
-    \begin{tikzpicture}[node distance=2cm]
-        \node (plugin) [plugin,xshift=-2] {Plugin};
-        \node (api) [api, below of=plugin] {API REST};
-        \node (axe) [axe, left of=api, xshift=-3cm] {axe-core};
-        \node (puppeteer) [puppeteer, below of=api] {Puppeteer};
+  \centering
+  \caption{Fluxo de execução da API}
+  \label{fig:fluxo}
+  \begin{tikzpicture}[node distance=2cm]
+    \node (plugin) [plugin,xshift=-2] {Plugin};
+    \node (api) [api, below of=plugin] {API REST};
+    \node (axe) [axe, left of=api, xshift=-3cm] {axe-core};
+    \node (puppeteer) [puppeteer, below of=api] {Puppeteer};
 
-        \draw [-latex,bend left] (plugin) edge node[anchor=west]{Url da página} (api);
-        \draw [-latex,bend left] (api) edge node[anchor=east]{Relatório}(plugin);
-        \draw [arrow] (api) -- node[anchor=west]{Url da página}(puppeteer);
-        \draw [arrow] (puppeteer) -| node[anchor=north]{Navegador Headless}(axe);
-        \draw [arrow] (axe) -- node[anchor=north]{Avaliação}(api);
-    \end{tikzpicture}
+    \draw [-latex,bend left] (plugin) edge node[anchor=west]{Url da página} (api);
+    \draw [-latex,bend left] (api) edge node[anchor=east]{Relatório}(plugin);
+    \draw [arrow] (api) -- node[anchor=west]{Url da página}(puppeteer);
+    \draw [arrow] (puppeteer) -| node[anchor=north]{Navegador Headless}(axe);
+    \draw [arrow] (axe) -- node[anchor=north]{Avaliação}(api);
+  \end{tikzpicture}
 \end{figure}
 
 Seguindo como base o fluxo de execução da API, apresentado na figura~\ref{fig:fluxo},
@@ -463,12 +478,12 @@ volta para o plugin, que exibe as informações na interface do WordPress.
 
 As principais personalizações implementadas na API serão:
 \begin{itemize}
-    \item tradução dos relatórios para o português;
-    \item regras de acessibilidade que
-          não serão avaliadas por não serem passíveis de alteração pelos conteudistas;
-    \item diretrizes a serem avaliadas, como WCAG 2.1/2.2, ACT~\cite{ACT} e Best
-          Practices~\cite{BP};
-    \item tag HTML a ser avaliada que, para o contexto da UFJF, é o elemento que possui o conteúdo de responsabilidade do conteudista.
+  \item tradução dos relatórios para o português;
+  \item regras de acessibilidade que
+        não serão avaliadas por não serem passíveis de alteração pelos conteudistas;
+  \item diretrizes a serem avaliadas, como WCAG 2.1/2.2, ACT~\cite{ACT} e Best
+        Practices~\cite{BP};
+  \item tag HTML a ser avaliada que, para o contexto da UFJF, é o elemento que possui o conteúdo de responsabilidade do conteudista.
 \end{itemize}
 
 Entendendo o funcionamento da API e a sua importância para o
@@ -483,10 +498,10 @@ gerenciador de conteúdo, o WordPress possui uma área de administração, onde
 os conteudistas podem visualizar todos os posts e as páginas do site, e editar o conteúdo
 de cada um deles, representado na figura~\ref{fig:wp-admin}.
 \begin{figure}[ht]
-    \centering
-    \caption{Área de administração do WordPress}
-    \label{fig:wp-admin}
-    \includegraphics[width=0.7\textwidth]{imagem1.png}
+  \centering
+  \caption{Área de administração do WordPress}
+  \label{fig:wp-admin}
+  \includegraphics[width=0.88\textwidth]{imagem1.png}
 \end{figure}
 
 Tendo isso em mente, o plugin é desenvolvido para adicionar um novo botão na
@@ -497,10 +512,10 @@ então exibe o relatório na interface do WordPress, organizando os dados
 por categoria e criticalidade, representado na figura~\ref{fig:relatorio}.
 
 \begin{figure}[ht]
-    \centering
-    \caption{Relatório de acessibilidade do plugin}
-    \label{fig:relatorio}
-    \includegraphics[width=0.7\textwidth]{imagem2.png}
+  \centering
+  \caption{Relatório de acessibilidade do plugin}
+  \label{fig:relatorio}
+  \includegraphics[width=0.88\textwidth]{imagem2.png}
 \end{figure}
 
 
@@ -510,11 +525,11 @@ o título da regra de acessibilidade, a descrição do erro, uma sugestão de co
 e um link que abre a página em uma nova aba, com o elemento que apresenta o erro de
 forma destacada, representado na figura~\ref{fig:relatorio2}.
 
-\begin{figure}[h]
-    \centering
-    \caption{Relatório de acessibilidade do plugin}
-    \label{fig:relatorio2}
-    \includegraphics[width=0.7\textwidth]{imagem3.png}
+\begin{figure}[ht]
+  \centering
+  \caption{Relatório de acessibilidade do plugin}
+  \label{fig:relatorio2}
+  \includegraphics[width=0.88\textwidth]{imagem3.png}
 \end{figure}
 
 Dessa forma, o plugin permite que os conteudistas da UFJF possam avaliar a
@@ -523,11 +538,11 @@ de conhecimentos técnicos em relação a elementos HTML, CSS e JavaScript.
 Além disso, o plugin permite que os conteudistas possam visualizar o que
 deverá ser corrigido e como fazer isso, representado na figura~\ref{fig:relatorio3}.
 
-\begin{figure}[h]
-    \centering
-    \caption{Relatório de acessibilidade do plugin}
-    \label{fig:relatorio3}
-    \includegraphics[width=0.7\textwidth]{imagem4.png}
+\begin{figure}[ht]
+  \centering
+  \caption{Relatório de acessibilidade do plugin}
+  \label{fig:relatorio3}
+  \includegraphics[width=0.88\textwidth]{imagem4.png}
 \end{figure}
 
 
@@ -592,7 +607,7 @@ organização.
 
 % Referências bibliográficas
 \bibliographystyle{abntex2-alf}  % Estilo autor-data da ABNT
-\bibliography{referencias}  % Arquivo .bib contendo as referências
+\bibliography{references}  % Arquivo .bib contendo as referências
 
 
 \end{document}
